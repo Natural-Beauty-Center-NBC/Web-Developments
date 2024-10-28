@@ -40,15 +40,6 @@ class AuthenticatedSessionController extends Controller
         return back()->withErrors([
             'email' => 'Invalid login credentials.',
         ]);
-
-        // Default code (Deleting Soon ...)
-        /*
-        $request->authenticate();
-
-        $request->session()->regenerate();
-
-        return redirect()->intended(route('public.home', absolute: false));
-        */
     }
 
     public function storePegawai(LoginRequest $request): RedirectResponse
@@ -90,5 +81,22 @@ class AuthenticatedSessionController extends Controller
         return redirect('/');
     }
 
-    
+    public function destroyPegawai(Request $request)
+    {
+        // Log out the 'pegawai' guard
+        Auth::guard('pegawai')->logout();
+
+        // Invalidate the current session
+        $request->session()->invalidate();
+
+        // Regenerate the CSRF token
+        $request->session()->regenerateToken();
+
+        // Clear the application cache (optional, to ensure no stale session data remains)
+        \Illuminate\Support\Facades\Artisan::call('cache:clear');
+        \Illuminate\Support\Facades\Artisan::call('config:cache');
+
+        // Redirect the user to the home page after session is cleared
+        return redirect('/')->with('status', 'Session cleared and logged out successfully');
+    }
 }

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -40,10 +39,43 @@ class PegawaiSeeder extends Seeder
             'nama' => 'KepalaKlinik',
             'email' => 'nbc.kepala@gmail.com',
             'alamat' => 'Yogyakarta',
-            'no_telp' => '081804020991',
+            'no_telp' => '081804020996',
             'status' => 'Available',
             'password' => bcrypt('nbckepala1234'),
-            'role' => 'Dokter'
+            'role' => 'Kepala Klinik'
+        ]);
+
+        // CUSTOMER SERVICE ROLE :
+        DB::table('pegawais')->insert([
+            'nama' => 'CustomerService',
+            'email' => 'nbc.cs@gmail.com',
+            'alamat' => 'Yogyakarta',
+            'no_telp' => '081804020997',
+            'status' => 'Busy',
+            'password' => bcrypt('nbcservice1234'),
+            'role' => 'Customer Service'
+        ]);
+
+        // KASIR ROLE :
+        DB::table('pegawais')->insert([
+            'nama' => 'Kasir',
+            'email' => 'nbc.kasir@gmail.com',
+            'alamat' => 'Yogyakarta',
+            'no_telp' => '081804020934',
+            'status' => 'Busy',
+            'password' => bcrypt('nbckasir1234'),
+            'role' => 'Kasir'
+        ]);
+
+        // BEAUTICIAN ROLE :
+        DB::table('pegawais')->insert([
+            'nama' => 'Beautician',
+            'email' => 'nbc.beautician@gmail.com',
+            'alamat' => 'Yogyakarta',
+            'no_telp' => '081804020935',
+            'status' => 'Busy',
+            'password' => bcrypt('nbcbeautician1234'),
+            'role' => 'Beautician'
         ]);
     }
 }

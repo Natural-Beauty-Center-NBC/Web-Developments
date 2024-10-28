@@ -23,6 +23,9 @@ Route::middleware(AdminAccess::class)->group(function() {
     Route::get('/admin/data-pegawai', [PegawaiController::class, 'index_data_pegawai'])->name('admin.index-pegawai');
     Route::get('/admin/data-pegawai/create', [PegawaiController::class, 'create_data_pegawai'])->name('admin.create-pegawai');
     Route::post('/admin/data-pegawai', [PegawaiController::class, 'store_data_pegawai'])->name('admin.store-pegawai');
+    Route::get('/admin/data-pegawai/{id}', [PegawaiController::class, 'edit_data_pegawai'])->name('admin.edit-pegawai');
+    Route::put('/admin/data-pegawai/{id}', [PegawaiController::class, 'update_data_pegawai'])->name('admin.update-pegawai');
+    Route::delete('/admin/data-pegawai/{id}', [PegawaiController::class, 'destroy_data_pegawai'])->name('admin.destroy-pegawai');
 });
 
 // TODO -> Put the route here including the middleware (Similiar with ADMIN ROLE ROUTE ACCESS)

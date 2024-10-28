@@ -19,9 +19,17 @@ class PegawaiController extends Controller
         ]);
     }
 
-    public function index_data_pegawai()
+    public function index_data_pegawai(Request $request)
     {
-        $pegawais = Pegawai::where('role', '!=', 'Admin')->get();
+        $query = $request->input('query', ''); // Retrieve the search query
+
+        // Filter employees based on the search query
+        $pegawais = Pegawai::where('role', '!=', 'Admin')
+            ->when($query, function ($queryBuilder) use ($query) {
+                $queryBuilder->where('nama', 'LIKE', '%' . $query . '%');
+            })
+            ->get();
+
         return view('core.admin.data-pegawai.index', compact('pegawais'))->with([
             'title' => 'Admin | Pegawai'
         ]);
@@ -63,42 +71,64 @@ class PegawaiController extends Controller
                 'password' => Hash::make($request->password)
             ]);
             return redirect()->route('admin.index-pegawai');
-
         } catch (Exception $e) {
             //throw $th;
         }
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit_data_pegawai($id)
     {
-        //
+        $pegawai = Pegawai::find($id);
+        return view('core.admin.data-pegawai.edit', compact('pegawai'))->with([
+            'title' => 'Admin | Update Pegawai'
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update_data_pegawai(Request $request, $id)
     {
-        //
+        $pegawai = Pegawai::find($id);
+
+        $request->validate([
+            "nama" => "required",
+            "email" => "required|email",
+            'alamat' => 'required',
+            "no_telp" => "required|numeric|min_digits:12",
+            "role" => "required",
+            "status" => "required",
+            "password" => "required"
+        ]);
+
+        try {
+            $pegawai->update([
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'alamat' => $request->alamat,
+                'no_telp' => $request->no_telp,
+                'role' => $request->role,
+                'status' => $request->status,
+                'password' => Hash::make($request->password)
+            ]);
+            return redirect()->route('admin.index-pegawai');
+        } catch (Exception $e) {
+
+            return redirect()->route('admin.index-pegawai');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy_data_pegawai($id)
     {
-        //
+        $pegawai = Pegawai::find($id);
+        $pegawai->delete();
+        return redirect()->route('admin.index-pegawai');
     }
 
     // DOKTER ROLE :
