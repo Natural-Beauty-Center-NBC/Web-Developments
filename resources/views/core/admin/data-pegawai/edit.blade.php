@@ -1,6 +1,6 @@
-@extends('core.admin.home')
+@extends('core.admin.layouts.main')
 @section('content')
-<form class="p-8 my-6 mx-4 bg-white rounded-lg shadow" method="POST" action="{{ route('admin.store-pegawai') }}" enctype="multipart/form-data">
+<form class="p-8 my-6 mx-4 bg-white rounded-lg shadow" method="POST" action="{{ route('admin.update-pegawai', ['id' => $pegawai->id]) }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <h3 class=" mt-5 flex items-center mb-4 text-lg font-semibold text-gray-900">Update Data Pegawai</h3>
@@ -26,19 +26,19 @@
                 <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role Pegawai</label>
                 <select name="role" id="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#FF9EAA] focus:border-[#FF9EAA] block w-full p-2.5" required>
                     <option value="" disabled selected>Pilih Role Pegawai</option>
-                    <option value="Kepala Klinik">Kepala Klinik</option>
-                    <option value="Customer Service">Customer Service</option>
-                    <option value="Kasir">Kasir</option>
-                    <option value="Dokter">Dokter</option>
-                    <option value="Beautician">Beautician</option>
+                    <option value="Kepala Klinik" <?= $pegawai->role === "Kepala Klinik" ? 'selected' : ''; ?>>Kepala Klinik</option>
+                    <option value="Customer Service" <?= $pegawai->role === "Customer Service" ? 'selected' : ''; ?>>Customer Service</option>
+                    <option value="Kasir" <?= $pegawai->role === "Kasir" ? 'selected' : ''; ?>>Kasir</option>
+                    <option value="Dokter" <?= $pegawai->role === "Dokter" ? 'selected' : ''; ?>>Dokter</option>
+                    <option value="Beautician" <?= $pegawai->role === "Beautician" ? 'selected' : ''; ?>>Beautician</option>
                 </select>
             </div>
             <div class="w-full">
                 <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status Pegawai</label>
                 <select name="status" id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     <option value="" disabled selected>Pilih Status Pegawai</option>
-                    <option value="Available">Available</option>
-                    <option value="Busy">Busy</option>
+                    <option value="Available" <?= $pegawai->status === "Available" ? 'selected' : ''; ?>>Available</option>
+                    <option value="Busy" <?= $pegawai->role === "Available" ? 'selected' : ''; ?>>Busy</option>
                 </select>
             </div>
         </div>

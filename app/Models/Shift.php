@@ -11,6 +11,7 @@ class Shift extends Model
 
     protected $fillable = [
         'nama',
-        'jam_shift'
+        'start_at',
+        'end_at'
     ];
 }

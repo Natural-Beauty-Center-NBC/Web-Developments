@@ -1,4 +1,4 @@
-@extends('core.admin.home')
+@extends('core.admin.layouts.main')
 @section('content')
 <form class="p-8 my-6 mx-4 bg-white rounded-lg shadow" method="POST" action="{{ route('admin.store-pegawai') }}" enctype="multipart/form-data">
     @csrf

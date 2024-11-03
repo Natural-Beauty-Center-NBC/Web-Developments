@@ -25,8 +25,28 @@ class PegawaiSeeder extends Seeder
 
         // DOKTER ROLE :
         DB::table('pegawais')->insert([
-            'nama' => 'Administrator',
+            'nama' => 'Dokter 1',
             'email' => 'nbc.dokter@gmail.com',
+            'alamat' => 'Yogyakarta',
+            'no_telp' => '081804020991',
+            'status' => 'Available',
+            'password' => bcrypt('nbcdokter1234'),
+            'role' => 'Dokter'
+        ]);
+
+        DB::table('pegawais')->insert([
+            'nama' => 'Dokter 4',
+            'email' => 'nbc.dokter2@gmail.com',
+            'alamat' => 'Yogyakarta',
+            'no_telp' => '081804020991',
+            'status' => 'Available',
+            'password' => bcrypt('nbcdokter1234'),
+            'role' => 'Dokter'
+        ]);
+
+        DB::table('pegawais')->insert([
+            'nama' => 'Dokter 3',
+            'email' => 'nbc.dokter3@gmail.com',
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020991',
             'status' => 'Available',
@@ -69,8 +89,28 @@ class PegawaiSeeder extends Seeder
 
         // BEAUTICIAN ROLE :
         DB::table('pegawais')->insert([
-            'nama' => 'Beautician',
+            'nama' => 'Beautician 1',
             'email' => 'nbc.beautician@gmail.com',
+            'alamat' => 'Yogyakarta',
+            'no_telp' => '081804020935',
+            'status' => 'Busy',
+            'password' => bcrypt('nbcbeautician1234'),
+            'role' => 'Beautician'
+        ]);
+
+        DB::table('pegawais')->insert([
+            'nama' => 'Beautician 2',
+            'email' => 'nbc.beautician2@gmail.com',
+            'alamat' => 'Yogyakarta',
+            'no_telp' => '081804020935',
+            'status' => 'Busy',
+            'password' => bcrypt('nbcbeautician1234'),
+            'role' => 'Beautician'
+        ]);
+
+        DB::table('pegawais')->insert([
+            'nama' => 'Beautician 3',
+            'email' => 'nbc.beautician3@gmail.com',
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020935',
             'status' => 'Busy',

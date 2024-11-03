@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('shifts', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('jam_shift');
+            $table->time('start_at');
+            $table->time('end_at');
             $table->timestamps();
         });
     }

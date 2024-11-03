@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -33,17 +34,10 @@ class AuthenticatedSessionController extends Controller
             $request->session()->regenerate();
 
             // Default redirect
+            Alert::success('Success', 'Anda berhasil Login!');
             return redirect()->intended(route('public.home'));
         }
 
-        // Fallback if authentication fails
-        return back()->withErrors([
-            'email' => 'Invalid login credentials.',
-        ]);
-    }
-
-    public function storePegawai(LoginRequest $request): RedirectResponse
-    {
         // Attempt to authenticate against the `pegawai` guard
         if (Auth::guard('pegawai')->attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
@@ -52,9 +46,10 @@ class AuthenticatedSessionController extends Controller
             $role = Auth::guard('pegawai')->user()->role;
 
             if ($role === 'Admin') {
+                Alert::success('Success', 'Anda berhasil Login sebagai Admin');
                 return redirect()->route('admin.home');
-            } elseif ($role === 'Dokter') {
-                return redirect()->route('user.dashboard');
+            } elseif ($role === 'Kepala Klinik') {
+                return redirect()->route('kepala-klinik.home');
             }
 
             // Default redirect
@@ -62,9 +57,8 @@ class AuthenticatedSessionController extends Controller
         }
 
         // Fallback if authentication fails
-        return back()->withErrors([
-            'email' => 'Invalid login credentials.',
-        ]);
+        Alert::error('Error', 'Akun tidak valid!');
+        return back();
     }
 
     /**
@@ -81,22 +75,15 @@ class AuthenticatedSessionController extends Controller
         return redirect('/');
     }
 
-    public function destroyPegawai(Request $request)
+    public function destroyPegawai(Request $request): RedirectResponse
     {
-        // Log out the 'pegawai' guard
         Auth::guard('pegawai')->logout();
 
-        // Invalidate the current session
         $request->session()->invalidate();
 
-        // Regenerate the CSRF token
         $request->session()->regenerateToken();
 
-        // Clear the application cache (optional, to ensure no stale session data remains)
-        \Illuminate\Support\Facades\Artisan::call('cache:clear');
-        \Illuminate\Support\Facades\Artisan::call('config:cache');
-
-        // Redirect the user to the home page after session is cleared
-        return redirect('/')->with('status', 'Session cleared and logged out successfully');
+        Alert::success('Success', 'Anda berhasil melakukan logout!');
+        return redirect('/');
     }
 }

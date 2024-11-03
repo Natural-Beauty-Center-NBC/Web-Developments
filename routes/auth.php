@@ -22,11 +22,6 @@ Route::middleware('guest')->group(function () {
 
     Route::post('login', [AuthenticatedSessionController::class, 'store'])->name('login.save');
 
-    Route::get('login-staff', [AuthenticatedSessionController::class, 'createPegawai'])
-        ->name('login-staff');
-
-    Route::post('login-staff', [AuthenticatedSessionController::class, 'storePegawai'])->name('login-staff.save');
-
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
 
@@ -40,7 +35,7 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:web')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
 
@@ -61,6 +56,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+});
+
+Route::middleware('auth:pegawai')->group(function () {
     Route::post('logout-staff', [AuthenticatedSessionController::class, 'destroyPegawai'])
         ->name('logout-staff');
 });

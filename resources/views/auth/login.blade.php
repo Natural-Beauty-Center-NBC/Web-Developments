@@ -27,6 +27,10 @@
                 @error('password')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
+                <div class="mt-2">
+                <input type="checkbox" id="togglePassword" class="mr-1">
+                <label for="togglePassword" class="text-sm text-gray-900 dark:text-white">Show Password</label>
+            </div>
             </div>
             <div class="flex items-start">
                 <a href="{{ route('password.request') }}" class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Forgot
@@ -39,10 +43,17 @@
                 Not registered yet? <a class="text-blue-700 hover:underline dark:text-blue-500"
                     href="{{ route('register') }}">Create account (Customer Only)</a>
             </div>
-            <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                Are you staff? <a class="text-blue-700 hover:underline dark:text-blue-500"
-                    href="{{ route('login-staff') }}">Login here!</a>
-            </div>
         </form>
     </div>
 </x-guest-layout>
+
+<script>
+    document.getElementById("togglePassword").addEventListener("change", function() {
+        const passwordInput = document.getElementById("password");
+        if (this.checked) {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    });
+</script>

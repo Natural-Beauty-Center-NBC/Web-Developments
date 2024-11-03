@@ -21,9 +21,6 @@
                     <x-nav-link :href="route('public.home')" :active="request()->routeIs('dashboard')" class="text-white">
                         {{ __('Layanan Perawatan') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('public.home')" :active="request()->routeIs('dashboard')" class="text-white">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
                 </div>
             </div>
 

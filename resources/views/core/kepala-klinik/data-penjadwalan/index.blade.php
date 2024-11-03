@@ -1,34 +1,20 @@
-@extends('core.admin.layouts.main')
+@extends('core.kepala-klinik.layouts.main')
 @section('content')
 <div class="p-4 my-6 mx-4 bg-white rounded-lg shadow md:flex flex-col md:p-6 xl:p-8 dark:bg-gray-800">
     <div class="w-full mb-1">
         <div class="mb-4">
-            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl">Daftar Data Pegawai</h1>
+            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl">Daftar Penjadwalan</h1>
         </div>
 
-        <div class="flex flex-row justify-between gap-4 text-right mb-4 mt-8">
-            <form action="{{ route('admin.index-pegawai') }}" method="GET">
-                <input
-                    id="query"
-                    type="text"
-                    name="query"
-                    placeholder="Cari pegawai..."
-                    value="{{ request('query') }}"
-                    class="px-3 py-2 border rounded-lg text-sm focus:outline-none w-[350px]" />
-                <button
-                    type="submit"
-                    class="px-3 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800">
-                    Search
-                </button>
-            </form>
+        <div class="flex flex-row justify-end gap-4 text-right mb-4 mt-8">
             <div>
-                <a href="{{ route('admin.create-pegawai') }}"
+                <a href="{{ route('kepala-klinik.create-penjadwalan') }}"
                     class="inline-flex gap-2 justify-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                    Tambah Data Pegawai
+                    Tambah Jadwal
                 </a>
             </div>
         </div>
@@ -42,16 +28,16 @@
                         No
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Nama
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Email
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        No Telepon
+                        Pegawai
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Role
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Hari Kerja
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Jam Kerja
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Action
@@ -60,7 +46,7 @@
             </thead>
             <tbody>
                 <?php $i = 0 ?>
-                @foreach($pegawais as $pegawai)
+                @foreach($penjadwalans as $item)
                 <tr class="bg-white border-b">
                     <td>
                         <p class="text-center">
@@ -68,20 +54,20 @@
                         </p>
                     </td>
                     <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $pegawai->nama }}
+                        {{ $item->pegawai->nama }}
                     </td>
                     <td class="px-6 py-4 ">
-                        {{ $pegawai->email }}
+                        {{ $item->pegawai->role }}
                     </td>
-                    <td class="px-6 py-4">
-                        {{ $pegawai->no_telp }}
+                    <td class="px-6 py-4 text-center">
+                        {{ $item->hari->nama }}
                     </td>
-                    <td class="px-6 py-4">
-                        {{ $pegawai->role }}
+                    <td class="px-6 py-4 text-center">
+                        {{ $item->shift->start_at }} WIB - {{ $item->shift->end_at }} WIB
                     </td>
                     <td class="px-6 py-4">
                         <div class="flex gap-4">
-                            <a href="{{ route('admin.edit-pegawai', ['id' => $pegawai->id]) }}"
+                            <a href="{{ route('kepala-klinik.edit-penjadwalan', ['id' => $item->id]) }}"
                                 class="inline-flex gap-2 justify-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Edit
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -90,7 +76,7 @@
                                         d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                 </svg>
                             </a>
-                            <form action="{{ route('admin.destroy-pegawai', ['id' => $pegawai->id]) }}" method="POST">
+                            <form action="{{ route('kepala-klinik.destroy-penjadwalan', ['id' => $item->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
