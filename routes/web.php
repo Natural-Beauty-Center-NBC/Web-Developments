@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PenjadwalanController;
+use App\Http\Controllers\PerawatanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShiftController;
@@ -41,6 +42,16 @@ Route::middleware(AdminAccess::class)->group(function() {
     Route::put('/admin/produk/{id}', [ProdukController::class, 'update'])->name('admin.update-produk'); 
     Route::delete('/admin/produk/{id}', [ProdukController::class, 'destroy'])->name('admin.destroy-produk');
     Route::get('/admin/produk/search', [ProdukController::class, 'search'])->name('admin.search-produk');
+
+    // DATA PERAWATAN :
+    Route::get('/admin/perawatan', [PerawatanController::class, 'index'])->name('admin.index-perawatan');
+    Route::get('/admin/perawatan/create', [PerawatanController::class, 'create'])->name('admin.create-perawatan');
+    Route::post('/admin/perawatan', [PerawatanController::class, 'store'])->name('admin.store-perawatan');
+    Route::get('/admin/perawatan/{id}', [PerawatanController::class, 'edit'])->name('admin.edit-perawatan');
+    Route::put('/admin/perawatan/{id}', [PerawatanController::class, 'update'])->name('admin.update-perawatan');
+    Route::delete('/admin/perawatan/{id}', [PerawatanController::class, 'destroy'])->name('admin.destroy-perawatan');
+
+    // DATA RUANGAN :
 });
 
 // KEPALA KLINIK ROLE ROUTE ACCESS:

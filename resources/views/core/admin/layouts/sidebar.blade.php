@@ -25,15 +25,15 @@
                 </a>
             </li>
             <li>
-                <a href=" "
-                    class="{{ $title == 'Admin' ? 'bg-[#FF9EAA] to-[#5038ED] text-white font-bold' : '' }} flex items-center text-[16px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold p-2 mb-4 rounded-lg">
+                <a href="{{ route('admin.index-perawatan') }}"
+                    class="{{ $title == 'Admin | Perawatan' || $title == 'Admin | Tambah Perawatan' || $title == 'Admin | Update Perawatan' ? 'bg-[#FF9EAA] to-[#5038ED] text-white font-bold' : '' }} flex items-center text-[16px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold p-2 mb-4 rounded-lg">
                     <i class="bi bi-stars"></i>
                     <span class="ms-3">Data Perawatan</span>
                 </a>
             </li>
             <li>
                 <a href=" "
-                    class="{{ $title == 'Admin' ? 'bg-[#FF9EAA] to-[#5038ED] text-white font-bold' : '' }} flex items-center text-[16px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold p-2 mb-4 rounded-lg">
+                    class="{{ $title == 'Admin | Ruangan' || $title == 'Admin | Tambah Ruangan' || $title == 'Admin | Update Ruangan' ? 'bg-[#FF9EAA] to-[#5038ED] text-white font-bold' : '' }} flex items-center text-[16px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold p-2 mb-4 rounded-lg">
                     <i class="bi bi-building-check"></i>
                     <span class="ms-3">Data Ruangan</span>
                 </a>
