@@ -18,8 +18,8 @@
                 </a>
             </li>
             <li>
-                <a href=" "
-                    class="{{ $title == 'Admin' ? 'bg-[#FF9EAA] to-[#5038ED] text-white font-bold' : '' }} flex items-center text-[16px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold p-2 mb-4 rounded-lg">
+                <a href="{{ route('admin.index-produk') }}"
+                    class="{{ $title == 'Admin | Produk' || $title == 'Admin | Tambah Produk' || $title == 'Admin | Update Produk' || $title == 'Admin | Search Produk' ? 'bg-[#FF9EAA] to-[#5038ED] text-white font-bold' : '' }} flex items-center text-[16px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold p-2 mb-4 rounded-lg">
                     <i class="bi bi-capsule-pill"></i>
                     <span class="ms-3">Data Produk</span>
                 </a>
