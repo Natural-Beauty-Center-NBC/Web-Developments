@@ -8,6 +8,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Middleware\AdminAccess;
+use App\Http\Middleware\CustomerServiceAccess;
+use App\Http\Middleware\DokterAccess;
+use App\Http\Middleware\KasirAccess;
 use App\Http\Middleware\KepalaKlinikAccess;
 use Illuminate\Support\Facades\Route;
 
@@ -23,9 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// ADMIN ROLE ROUTE ACCESS:
+// ADMIN ROLE ROUTE ACCESS :
 Route::middleware(AdminAccess::class)->group(function() {
-    Route::get('/admin', [PegawaiController::class, 'index_admin'])->name('admin.home');
+    Route::get('/admin', [PegawaiController::class, 'home_admin'])->name('admin.home');
 
     // DATA PEGAWAI :
     Route::get('/admin/data-pegawai', [PegawaiController::class, 'index_data_pegawai'])->name('admin.index-pegawai');
@@ -81,19 +84,29 @@ Route::middleware(KepalaKlinikAccess::class)->group(function() {
     Route::delete('/kepala-klinik/shift/{id}', [ShiftController::class, 'destroy'])->name('kepala-klinik.destroy-shift');
 });
 
-// TODO -> Put the route here including the middleware (Similiar with ADMIN ROLE ROUTE ACCESS)
-// DOKTER ROLE ROUTE ACCESS:
+// CUSTROMER SERVICE ROLE ROUTE ACCESS :
+Route::middleware(CustomerServiceAccess::class)->group(function() {
+    Route::get('/customer-service', [PegawaiController::class, 'home_customer_service'])->name('customer-service.home');
 
-// CUSTROMER SERVICE ROLE ROUTE ACCESS:
+    // DATA CUSTOMER :
+    // TODO -> Put your route's code here!!
 
-// KASIR ROLE ROUTE ACCESS:
+    // TRANSAKSI :
+    // TODO -> Put your route's code here!!
+});
 
-// BEAUTICIAN ROLE ROUTE ACCESS:
+// DOKTER ROLE ROUTE ACCESS :
+Route::middleware(DokterAccess::class)->group(function() {
+    Route::get('/dokter', [PegawaiController::class, 'home_dokter'])->name('dokter.home');
+
+    // TODO -> Put your route's code here!!
+});
+
+// KASIR ROLE ROUTE ACCESS :
+Route::middleware(KasirAccess::class)->group(function() {
+    Route::get('/kasir', [PegawaiController::class, 'home_kasir'])->name('kasir.home');
+
+    // TODO -> Put your route's code here!!
+});
 
 require __DIR__.'/auth.php';
-
-/*
-Route::get('/dashboard', function () {
-    return view('public.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-*/

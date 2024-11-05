@@ -9,24 +9,23 @@ use App\Models\Shift;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PegawaiController extends Controller
 {
     // ADMIN ROLE :
-    public function index_admin()
+    public function home_admin()
     {
         $admin = Auth::guard('pegawai')->user();
-        return view('core.admin.layouts.main', compact('admin'))->with([
+        return view('core.admin.home', compact('admin'))->with([
             'title' => 'Admin | Home'
         ]);
     }
 
     public function index_data_pegawai(Request $request)
     {
-        $query = $request->input('query', ''); // Retrieve the search query
+        $query = $request->input('query', '');
 
         // Filter employees based on the search query
         $pegawais = Pegawai::where('role', '!=', 'Admin')
@@ -77,6 +76,7 @@ class PegawaiController extends Controller
             ]);
             Alert::success('Success', 'Data Pegawai berhasil ditambahkan!');
             return redirect()->route('admin.index-pegawai');
+
         } catch (Exception $e) {
             Alert::error('Error', 'Data Pegawai gagal ditambahkan!');
             return redirect()->route('admin.index-pegawai');
@@ -123,6 +123,7 @@ class PegawaiController extends Controller
             ]);
             Alert::success('Success', 'Data Pegawai berhasil diubah!');
             return redirect()->route('admin.index-pegawai');
+
         } catch (Exception $e) {
             Alert::error('Error', 'Data Pegawai gagal diubah!');
             return redirect()->route('admin.index-pegawai');
@@ -139,15 +140,6 @@ class PegawaiController extends Controller
 
         Alert::success('Success', 'Data Pegawai berhasil dihapus!');
         return redirect()->route('admin.index-pegawai');
-    }
-
-    // DOKTER ROLE :
-    public function index_dokter()
-    {
-        $dokter = Auth::guard('pegawai')->user();
-        return view('core.admin.home', compact('dokter'))->with([
-            'title' => 'Dokter'
-        ]);
     }
 
     // KEPALA KLINIK ROLE :
@@ -177,8 +169,29 @@ class PegawaiController extends Controller
     }
 
     // CUSTOMER SERVICE ROLE :
+    public function home_customer_service() 
+    {
+        $cs = Auth::guard('pegawai')->user();
+        return view('core.customer-service.home', compact('cs'))->with([
+            'title' => 'Customer Service | Home'
+        ]);
+    }
+
+    // DOKTER ROLE :
+    public function home_dokter()
+    {
+        $dokter = Auth::guard('pegawai')->user();
+        return view('core.dokter.home', compact('dokter'))->with([
+            'title' => 'Dokter | Home'
+        ]);
+    }
 
     // KASIR ROLE :
-
-    // DSB .....
+    public function home_kasir()
+    {
+        $kasir = Auth::guard('pegawai')->user();
+        return view('core.kasir.home', compact('kasir'))->with([
+            'title' => 'Kasir | Home'
+        ]);
+    }
 }

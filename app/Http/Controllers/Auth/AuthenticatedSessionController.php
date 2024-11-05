@@ -50,6 +50,12 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->route('admin.home');
             } elseif ($role === 'Kepala Klinik') {
                 return redirect()->route('kepala-klinik.home');
+            } elseif ($role === 'Customer Service') {
+                return redirect()->route('customer-service.home');
+            } elseif ($role === 'Dokter') {
+
+            } else if ($role === 'Kasir') {
+                
             }
 
             // Default redirect
