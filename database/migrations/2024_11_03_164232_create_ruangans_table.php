@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pegawais', function (Blueprint $table) {
+        Schema::create('ruangans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('email')->unique();
-            $table->string('alamat');
-            $table->char('no_telp', 20);
+            $table->integer('no_ruangan');
             $table->enum('status', ['Available', 'Assigned']);
-            $table->string('password');
-            $table->string('role');
+            $table->unsignedBigInteger('assign_to')->nullable();
             $table->timestamps();
+
+            // Relations
+            $table->foreign('assign_to')->references('id')->on('pegawais')->onDelete('cascade');
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pegawais');
+        Schema::dropIfExists('ruangans');
     }
 };

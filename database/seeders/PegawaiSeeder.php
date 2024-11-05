@@ -35,7 +35,7 @@ class PegawaiSeeder extends Seeder
         ]);
 
         DB::table('pegawais')->insert([
-            'nama' => 'Dokter 4',
+            'nama' => 'Dokter 2',
             'email' => 'nbc.dokter2@gmail.com',
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020991',
@@ -56,7 +56,7 @@ class PegawaiSeeder extends Seeder
 
         // KEPALA KLINIK ROLE :
         DB::table('pegawais')->insert([
-            'nama' => 'KepalaKlinik',
+            'nama' => 'Kepala Klinik',
             'email' => 'nbc.kepala@gmail.com',
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020996',
@@ -67,11 +67,11 @@ class PegawaiSeeder extends Seeder
 
         // CUSTOMER SERVICE ROLE :
         DB::table('pegawais')->insert([
-            'nama' => 'CustomerService',
+            'nama' => 'Customer Service',
             'email' => 'nbc.cs@gmail.com',
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020997',
-            'status' => 'Busy',
+            'status' => 'Assigned',
             'password' => bcrypt('nbcservice1234'),
             'role' => 'Customer Service'
         ]);
@@ -82,7 +82,7 @@ class PegawaiSeeder extends Seeder
             'email' => 'nbc.kasir@gmail.com',
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020934',
-            'status' => 'Busy',
+            'status' => 'Assigned',
             'password' => bcrypt('nbckasir1234'),
             'role' => 'Kasir'
         ]);
@@ -93,7 +93,7 @@ class PegawaiSeeder extends Seeder
             'email' => 'nbc.beautician@gmail.com',
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020935',
-            'status' => 'Busy',
+            'status' => 'Available',
             'password' => bcrypt('nbcbeautician1234'),
             'role' => 'Beautician'
         ]);
@@ -103,7 +103,7 @@ class PegawaiSeeder extends Seeder
             'email' => 'nbc.beautician2@gmail.com',
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020935',
-            'status' => 'Busy',
+            'status' => 'Available',
             'password' => bcrypt('nbcbeautician1234'),
             'role' => 'Beautician'
         ]);
@@ -113,7 +113,7 @@ class PegawaiSeeder extends Seeder
             'email' => 'nbc.beautician3@gmail.com',
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020935',
-            'status' => 'Busy',
+            'status' => 'Available',
             'password' => bcrypt('nbcbeautician1234'),
             'role' => 'Beautician'
         ]);

@@ -5,6 +5,7 @@ use App\Http\Controllers\PenjadwalanController;
 use App\Http\Controllers\PerawatanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Middleware\AdminAccess;
 use App\Http\Middleware\KepalaKlinikAccess;
@@ -52,6 +53,11 @@ Route::middleware(AdminAccess::class)->group(function() {
     Route::delete('/admin/perawatan/{id}', [PerawatanController::class, 'destroy'])->name('admin.destroy-perawatan');
 
     // DATA RUANGAN :
+    Route::get('/admin/ruangan', [RuanganController::class, 'index'])->name('admin.index-ruangan');
+    Route::post('/admin/ruangan', [RuanganController::class, 'store'])->name('admin.store-ruangan');
+    Route::get('/admin/ruangan/{id}', [RuanganController::class, 'edit'])->name('admin.edit-ruangan');
+    Route::put('/admin/ruangan/{id}', [RuanganController::class, 'update'])->name('admin.update-ruangan');
+    Route::delete('/admin/ruangan/{id}', [RuanganController::class, 'destroy'])->name('admin.destroy-ruangan');
 });
 
 // KEPALA KLINIK ROLE ROUTE ACCESS:
