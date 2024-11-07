@@ -7,6 +7,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\ShiftController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Middleware\AdminAccess;
 use App\Http\Middleware\CustomerServiceAccess;
 use App\Http\Middleware\DokterAccess;
@@ -92,7 +93,11 @@ Route::middleware(CustomerServiceAccess::class)->group(function() {
     // TODO -> Put your route's code here!!
 
     // TRANSAKSI :
-    // TODO -> Put your route's code here!!
+    Route::get('/customer-service/transaksi/create', [TransaksiController::class, 'create'])->name('customer-service.create-transaksi');
+    Route::get('/customer-service/transaksi/{tipe}', [TransaksiController::class, 'transaksi_dengan_konsultasi'])->name('customer-service.dengan-konsultasi');
+    Route::get('/customer-service/transaksi/tanpa-konsultasi', [TransaksiController::class, 'transaksi_tanpa_konsultasi'])->name('customer-service.tanpa-konsultasi');
+    Route::post('/customer-service/transaksi/dengan-konsultasi', [TransaksiController::class, 'store_dengan_konsultasi'])->name('customer-service.store-dengan-konsultasi');
+    Route::post('/customer-service/transaksi/tanpa-konsultasi', [TransaksiController::class, 'store_tanpa_konsultasi'])->name('customer-service.store-tanpa-konsultasi');
 });
 
 // DOKTER ROLE ROUTE ACCESS :

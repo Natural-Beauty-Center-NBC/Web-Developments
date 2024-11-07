@@ -49,8 +49,10 @@ class AuthenticatedSessionController extends Controller
                 Alert::success('Success', 'Anda berhasil Login sebagai Admin');
                 return redirect()->route('admin.home');
             } elseif ($role === 'Kepala Klinik') {
+                Alert::success('Success', 'Anda berhasil Login sebagai Kepala Klinik');
                 return redirect()->route('kepala-klinik.home');
             } elseif ($role === 'Customer Service') {
+                Alert::success('Success', 'Anda berhasil Login sebagai Customer Service');
                 return redirect()->route('customer-service.home');
             } elseif ($role === 'Dokter') {
 

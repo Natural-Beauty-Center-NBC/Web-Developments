@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('email')->unique();
+            $table->enum('jenis_kelamin', ['Pria', 'Wanita']);
             $table->string('alamat');
             $table->char('no_telp', 20);
             $table->enum('status', ['Available', 'Assigned']);

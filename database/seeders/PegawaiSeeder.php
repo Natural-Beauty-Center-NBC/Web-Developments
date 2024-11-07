@@ -19,6 +19,7 @@ class PegawaiSeeder extends Seeder
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020990',
             'status' => 'Available',
+            'jenis_kelamin' => 'Pria',
             'password' => bcrypt('nbcadmin1234'),
             'role' => 'Admin'
         ]);
@@ -30,6 +31,7 @@ class PegawaiSeeder extends Seeder
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020991',
             'status' => 'Available',
+            'jenis_kelamin' => 'Pria',
             'password' => bcrypt('nbcdokter1234'),
             'role' => 'Dokter'
         ]);
@@ -40,6 +42,7 @@ class PegawaiSeeder extends Seeder
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020991',
             'status' => 'Available',
+            'jenis_kelamin' => 'Pria',
             'password' => bcrypt('nbcdokter1234'),
             'role' => 'Dokter'
         ]);
@@ -50,6 +53,7 @@ class PegawaiSeeder extends Seeder
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020991',
             'status' => 'Available',
+            'jenis_kelamin' => 'Wanita',
             'password' => bcrypt('nbcdokter1234'),
             'role' => 'Dokter'
         ]);
@@ -61,6 +65,7 @@ class PegawaiSeeder extends Seeder
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020996',
             'status' => 'Available',
+            'jenis_kelamin' => 'Wanita',
             'password' => bcrypt('nbckepala1234'),
             'role' => 'Kepala Klinik'
         ]);
@@ -72,6 +77,7 @@ class PegawaiSeeder extends Seeder
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020997',
             'status' => 'Assigned',
+            'jenis_kelamin' => 'Pria',
             'password' => bcrypt('nbcservice1234'),
             'role' => 'Customer Service'
         ]);
@@ -83,6 +89,7 @@ class PegawaiSeeder extends Seeder
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020934',
             'status' => 'Assigned',
+            'jenis_kelamin' => 'Pria',
             'password' => bcrypt('nbckasir1234'),
             'role' => 'Kasir'
         ]);
@@ -94,6 +101,7 @@ class PegawaiSeeder extends Seeder
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020935',
             'status' => 'Available',
+            'jenis_kelamin' => 'Pria',
             'password' => bcrypt('nbcbeautician1234'),
             'role' => 'Beautician'
         ]);
@@ -104,6 +112,7 @@ class PegawaiSeeder extends Seeder
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020935',
             'status' => 'Available',
+            'jenis_kelamin' => 'Pria',
             'password' => bcrypt('nbcbeautician1234'),
             'role' => 'Beautician'
         ]);
@@ -114,6 +123,7 @@ class PegawaiSeeder extends Seeder
             'alamat' => 'Yogyakarta',
             'no_telp' => '081804020935',
             'status' => 'Available',
+            'jenis_kelamin' => 'Wanita',
             'password' => bcrypt('nbcbeautician1234'),
             'role' => 'Beautician'
         ]);
