@@ -34,6 +34,7 @@ class TransaksiController extends Controller
         $perawatans = Perawatan::where('tipe', 'Non-Konsultasi')->get();
         $ruangans = Ruangan::where('status', 'Available')->get();
         $beauticians = Pegawai::where('role', 'Beautician')->where('status', 'Available')->get();
+
         return view('core.customer-service.pendaftaran-transaksi.transaksi-tanpa-konsultasi', compact('perawatans', 'ruangans', 'beauticians'))->with([
             'title' => 'Customer Service | Transaksi tanpa Konsultasi'
         ]);
@@ -68,7 +69,6 @@ class TransaksiController extends Controller
         try {
             Transaksi::create([
                 'no_transaksi' => '-', // Placeholder for now
-                'jenis_transaksi' => $request->tipe_pendaftaran,
                 'tanggal_transaksi' => $date,
                 'customer_id' => $customer->id,
                 'dokter_id' => $request->dokter,
@@ -76,20 +76,16 @@ class TransaksiController extends Controller
             ]);
 
             // Update the no_transaksi with existing data's id -> Generate the no_transaksi based on format [ddMMyy-id]
+            // Update jenis_transaksi based on $request->tipe_pendaftaran input's value as transaction's identifier
             $transaksi = Transaksi::orderBy('created_at', 'desc')->first();
             $transaksi->no_transaksi = $dateSeries . '-' . $transaksi->id;
+            $transaksi->jenis_transaksi = $request->tipe_pendaftaran;
             $transaksi->save();
-
-            // Update Dokter's status 
-            $dokter = Pegawai::find($request->dokter);
-            $dokter->status = 'Assigned';
-            $dokter->save();
 
             Alert::success('Success', 'Data Transaksi Customer [' . $request->id_customer . '] berhasil ditambahkan!');
             return redirect()->route('customer-service.create-transaksi');
-
         } catch (Exception $e) {
-            Alert::error('Error', 'Data Transaksi Customer [' . $request->id_customer . '] gagal ditambahkan!');
+            Alert::error('Error', $e->getMessage());
             return redirect()->route('customer-service.create-transaksi');
         }
     }
@@ -125,17 +121,18 @@ class TransaksiController extends Controller
             // Create the transaction record
             Transaksi::create([
                 'no_transaksi' => '-', // Placeholder for now
-                'jenis_transaksi' => 'Perawatan tanpa Konsultasi',
                 'tanggal_transaksi' => $date,
                 'customer_id' => $customer->id,
                 'beautician_id' => $request->beautician,
-                'customer_service_id' => $request->cs, 
+                'customer_service_id' => $request->cs,
                 'ruangan_id' => $request->ruangan
             ]);
 
             // Update the no_transaksi with existing data's id -> Generate the no_transaksi based on format [ddMMyy-id]
+            // Update jenis_transaksi with 'Perawatan tanpa Konsultasi' as transaction's identifier
             $transaksi = Transaksi::orderBy('created_at', 'desc')->first();
             $transaksi->no_transaksi = $dateSeries . '-' . $transaksi->id;
+            $transaksi->jenis_transaksi = 'Perawatan tanpa Konsultasi';
             $transaksi->save();
 
             // Update ruangan's status and assign to
@@ -151,9 +148,9 @@ class TransaksiController extends Controller
 
             Alert::success('Success', 'Data Transaksi Customer [' . $request->id_customer . '] berhasil ditambahkan!');
             return redirect()->route('customer-service.create-transaksi');
-
         } catch (Exception $e) {
-            Alert::error('Error', 'Data Transaksi Customer [' . $request->id_customer . '] gagal ditambahkan!');
+
+            Alert::error('Error', $e->getMessage());
             return redirect()->route('customer-service.create-transaksi');
         }
     }

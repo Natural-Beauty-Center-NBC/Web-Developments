@@ -81,12 +81,11 @@
                             @endforeach
                         </select>
                     </td>
-
                     <td class="px-6 py-4">
-                        <form action="{{ route('admin.destroy-ruangan', ['id' => $item->id]) }}" method="POST">
+                        <form id="delete-form-{{ $item->id }}" action="{{ route('admin.destroy-ruangan', ['id' => $item->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit"
+                            <button type="button" onclick="confirmDelete({{ $item->id }})"
                                 class="inline-flex gap-2 justify-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                 Hapus
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -156,6 +155,9 @@
                             title: "Success",
                             text: "Data Ruangan berhasil diubah!",
                             icon: "success"
+                        }).then(() => {
+                            // Auto Refresh the page when assign_to's value is successfully changed
+                            location.reload();
                         });
                     } else {
                         Swal.fire({
@@ -173,6 +175,22 @@
         });
     });
 
-    // TODO -> auto loader
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data Ruangan akan dihapus secara permanen!",
+            icon: 'warning',
+            showCancelButton: true,
+            allowOutsideClick: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(`delete-form-${id}`).submit();
+            }
+        });
+    }
 </script>
 @endsection

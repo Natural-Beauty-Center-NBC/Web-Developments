@@ -60,7 +60,6 @@ class PegawaiController extends Controller
             'alamat' => 'required',
             'no_telp' => 'required|numeric|min_digits:12',
             'role' => 'required',
-            'status' => 'required',
             'password' => 'required'
         ]);
 
@@ -71,7 +70,7 @@ class PegawaiController extends Controller
                 'alamat' => $request->alamat,
                 'no_telp' => $request->no_telp,
                 'role' => $request->role,
-                'status' => $request->status,
+                'status' => 'Available',
                 'password' => Hash::make($request->password)
             ]);
             Alert::success('Success', 'Data Pegawai berhasil ditambahkan!');
@@ -161,7 +160,6 @@ class PegawaiController extends Controller
             ->groupBy('shift_id', 'hari_id', 'pegawai_id') // Group by shift_id and hari_id
             ->with('pegawai') // Load pegawai data
             ->get();
-
 
         return view('core.kepala-klinik.home', compact('dokters', 'beauticians', 'haris', 'shifts'))->with([
             'title' => 'Kepala Klinik | Home'

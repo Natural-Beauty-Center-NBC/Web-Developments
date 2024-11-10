@@ -1,6 +1,6 @@
 @extends('core.customer-service.layouts.main')
 @section('content')
-<form class="p-8 my-6 mx-4 bg-white rounded-lg shadow" method="POST" action="{{ route('customer-service.store-tanpa-konsultasi') }}" enctype="multipart/form-data">
+<form id="save-form" class="p-8 my-6 mx-4 bg-white rounded-lg shadow" method="POST" action="{{ route('customer-service.store-tanpa-konsultasi') }}" enctype="multipart/form-data">
     @csrf
     <h3 class="mt-5 flex items-center mb-4 text-lg font-semibold text-gray-900">Pendaftaran Perawatan tanpa Konsultasi</h3>
     <div class="w-full flex flex-col gap-4">
@@ -38,8 +38,29 @@
         <input type="hidden" name="cs" value="{{ Auth::guard('pegawai')->user()->id }}" />
 
         <div class="flex w-full justify-end">
-            <button type="submit" class="w-1/4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Submit</button>
+            <button type="button" onclick="confirmSave()" class="w-1/4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Submit</button>
         </div>
     </div>
 </form>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmSave() {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data Transaksi akan didaftarkan!",
+            icon: 'warning',
+            showCancelButton: true,
+            allowOutsideClick: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Daftar!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(`save-form`).submit();
+            }
+        });
+    }
+</script>
 @endsection

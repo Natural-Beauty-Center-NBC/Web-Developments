@@ -80,6 +80,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
+        Alert::success('Success', 'Anda berhasil melakukan Logout!');
         return redirect('/');
     }
 
@@ -91,7 +92,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        Alert::success('Success', 'Anda berhasil melakukan logout!');
+        Alert::success('Success', 'Anda berhasil melakukan Logout!');
         return redirect('/');
     }
 }

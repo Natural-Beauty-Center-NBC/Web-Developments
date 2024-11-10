@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->char('no_transaksi', 12)->unique();
             $table->enum('status_pembayaran', ['Paid', 'Pending'])->default('Pending');
-            $table->enum('jenis_transaksi', ['Perawatan dengan Konsultasi',  'Produk dengan Konsultasi', 'Perawatan tanpa Konsultasi']);
+            $table->enum('jenis_transaksi', ['Perawatan dengan Konsultasi',  'Produk dengan Konsultasi', 'Perawatan tanpa Konsultasi'])->nullable();
             $table->integer('total_harga')->default(0);
             $table->integer('diskon')->default(0);
             $table->integer('poin_earned')->default(0);

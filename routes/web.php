@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // ADMIN ROLE ROUTE ACCESS :
-Route::middleware(AdminAccess::class)->group(function() {
+Route::middleware(AdminAccess::class)->group(function () {
     Route::get('/admin', [PegawaiController::class, 'home_admin'])->name('admin.home');
 
     // DATA PEGAWAI :
@@ -40,11 +40,11 @@ Route::middleware(AdminAccess::class)->group(function() {
     Route::delete('/admin/data-pegawai/{id}', [PegawaiController::class, 'destroy_data_pegawai'])->name('admin.destroy-pegawai');
 
     // DATA PRODUK :
-    Route::get('/admin/produk', [ProdukController::class, 'index'])->name('admin.index-produk'); 
-    Route::get('/admin/produk/create', [ProdukController::class, 'create'])->name('admin.create-produk'); 
-    Route::post('/admin/produk', [ProdukController::class, 'store'])->name('admin.store-produk'); 
-    Route::get('/admin/produk/{id}/edit', [ProdukController::class, 'edit'])->name('admin.edit-produk'); 
-    Route::put('/admin/produk/{id}', [ProdukController::class, 'update'])->name('admin.update-produk'); 
+    Route::get('/admin/produk', [ProdukController::class, 'index'])->name('admin.index-produk');
+    Route::get('/admin/produk/create', [ProdukController::class, 'create'])->name('admin.create-produk');
+    Route::post('/admin/produk', [ProdukController::class, 'store'])->name('admin.store-produk');
+    Route::get('/admin/produk/{id}/edit', [ProdukController::class, 'edit'])->name('admin.edit-produk');
+    Route::put('/admin/produk/{id}', [ProdukController::class, 'update'])->name('admin.update-produk');
     Route::delete('/admin/produk/{id}', [ProdukController::class, 'destroy'])->name('admin.destroy-produk');
     Route::get('/admin/produk/search', [ProdukController::class, 'search'])->name('admin.search-produk');
 
@@ -65,7 +65,7 @@ Route::middleware(AdminAccess::class)->group(function() {
 });
 
 // KEPALA KLINIK ROLE ROUTE ACCESS:
-Route::middleware(KepalaKlinikAccess::class)->group(function() {
+Route::middleware(KepalaKlinikAccess::class)->group(function () {
     Route::get('/kepala-klinik', [PegawaiController::class, 'home_kepala_klinik'])->name('kepala-klinik.home');
 
     // PENJADWALAN :
@@ -86,32 +86,32 @@ Route::middleware(KepalaKlinikAccess::class)->group(function() {
 });
 
 // CUSTROMER SERVICE ROLE ROUTE ACCESS :
-Route::middleware(CustomerServiceAccess::class)->group(function() {
+Route::middleware(CustomerServiceAccess::class)->group(function () {
     Route::get('/customer-service', [PegawaiController::class, 'home_customer_service'])->name('customer-service.home');
 
     // DATA CUSTOMER :
     // TODO -> Put your route's code here!!
 
-    // TRANSAKSI :
+    // TRANSAKSI:
     Route::get('/customer-service/transaksi/create', [TransaksiController::class, 'create'])->name('customer-service.create-transaksi');
     Route::get('/customer-service/transaksi/{tipe}', [TransaksiController::class, 'transaksi_dengan_konsultasi'])->name('customer-service.dengan-konsultasi');
-    Route::get('/customer-service/transaksi/tanpa-konsultasi', [TransaksiController::class, 'transaksi_tanpa_konsultasi'])->name('customer-service.tanpa-konsultasi');
+    Route::get('/customer-service/transaksi/tanpa-konsultasi/create', [TransaksiController::class, 'transaksi_tanpa_konsultasi'])->name('customer-service.tanpa-konsultasi');
     Route::post('/customer-service/transaksi/dengan-konsultasi', [TransaksiController::class, 'store_dengan_konsultasi'])->name('customer-service.store-dengan-konsultasi');
     Route::post('/customer-service/transaksi/tanpa-konsultasi', [TransaksiController::class, 'store_tanpa_konsultasi'])->name('customer-service.store-tanpa-konsultasi');
 });
 
 // DOKTER ROLE ROUTE ACCESS :
-Route::middleware(DokterAccess::class)->group(function() {
+Route::middleware(DokterAccess::class)->group(function () {
     Route::get('/dokter', [PegawaiController::class, 'home_dokter'])->name('dokter.home');
 
     // TODO -> Put your route's code here!!
 });
 
 // KASIR ROLE ROUTE ACCESS :
-Route::middleware(KasirAccess::class)->group(function() {
+Route::middleware(KasirAccess::class)->group(function () {
     Route::get('/kasir', [PegawaiController::class, 'home_kasir'])->name('kasir.home');
 
     // TODO -> Put your route's code here!!
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
