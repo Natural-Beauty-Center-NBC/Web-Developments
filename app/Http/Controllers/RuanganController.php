@@ -18,7 +18,7 @@ class RuanganController extends Controller
         $query = $request->input('query', ''); // Retrieve the search query
 
         // Filter employees based on the search query
-        $ruangans = Ruangan::where('no_ruangan', 'LIKE', '%' . $query . '%')->get();
+        $ruangans = Ruangan::where('no_ruangan', 'LIKE', '%' . $query . '%')->paginate(5);
         $beauticians = Pegawai::where('role', 'Beautician')->get();
         return view('core.admin.data-ruangan.index', compact('ruangans', 'beauticians'))->with([
             'title' => 'Admin | Ruangan'

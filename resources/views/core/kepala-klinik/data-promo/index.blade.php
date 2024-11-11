@@ -104,6 +104,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $promos }}
     </div>
     
 </div>

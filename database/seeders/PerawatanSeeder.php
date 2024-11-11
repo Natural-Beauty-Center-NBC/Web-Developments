@@ -13,7 +13,7 @@ class PerawatanSeeder extends Seeder
     public function run(): void
     {
         // too run php artisan db:seed --class=PerawatanSeeder
-        //database *deskripsi* di ubah jadi panjang 500, VARCHAR(500).
+        // migrate dulu, panjang tabel deskripsi aku ubah dari 255 ke 500, bira mudah dari NBC-Browsur
         //Sekalian semua yang ada di browsur Perawatan= Mempermudah Dummy Laporan.
 
         DB::table('perawatans')->insert([

@@ -17,7 +17,7 @@ class PromoController extends Controller
      */
     public function index(Request $request)
     {
-        $promos = Promo ::all();
+        $promos = Promo ::paginate(5);
         return view('core.kepala-klinik.data-promo.index', compact('promos'))->with([
             'title' => 'Kepala Klinik | Promo'
         ]);

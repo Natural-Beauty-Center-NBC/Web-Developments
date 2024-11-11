@@ -100,6 +100,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $ruangans }}
     </div>
 
     <!-- Modal Structure -->
