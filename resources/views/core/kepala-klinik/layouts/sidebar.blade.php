@@ -25,8 +25,8 @@
                 </a>
             </li>
             <li>
-                <a href=" "
-                    class="{{ $title == 'Admin | Pegawai' || $title == 'Admin | Create Pegawai' || $title == 'Admin | Update Pegawai' ? 'bg-[#FF9EAA] to-[#5038ED] text-white font-bold' : '' }} flex items-center text-[16px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold p-2 mb-4 rounded-lg">
+                <a href="{{ route('kepala-klinik.index-promo') }}"
+                    class="{{ $title == 'Kepala Klinik | Promo' || $title == 'Kepala Klinik | Create Promo' || $title == 'Kepala Klinik | Update Promo' ? 'bg-[#FF9EAA] to-[#5038ED] text-white font-bold' : '' }} flex items-center text-[16px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold p-2 mb-4 rounded-lg">
                     <i class="bi bi-tags"></i>
                     <span class="ms-3">Data Promo</span>
                 </a>

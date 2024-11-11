@@ -3,6 +3,7 @@
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PenjadwalanController;
 use App\Http\Controllers\PerawatanController;
+use App\Http\Controllers\PromoController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RuanganController;
@@ -84,6 +85,16 @@ Route::middleware(KepalaKlinikAccess::class)->group(function () {
     Route::get('/kepala-klinik/shift/{id}', [ShiftController::class, 'edit'])->name('kepala-klinik.edit-shift');
     Route::put('/kepala-klinik/shift/{id}', [ShiftController::class, 'update'])->name('kepala-klinik.update-shift');
     Route::delete('/kepala-klinik/shift/{id}', [ShiftController::class, 'destroy'])->name('kepala-klinik.destroy-shift');
+
+    // PROMO :
+    Route::get('/kepala-klinik/promo', [PromoController::class, 'index'])->name('kepala-klinik.index-promo');
+    Route::get('/kepala-klinik/promo/create', [PromoController::class, 'create'])->name('kepala-klinik.create-promo');
+    Route::post('/kepala-klinik/promo', [PromoController::class, 'store'])->name('kepala-klinik.store-promo');
+    Route::get('/kepala-klinik/promo/{id}/show', [PromoController::class, 'show'])->name('kepala-klinik.show-promo');
+    Route::get('/kepala-klinik/promo/{id}/edit', [PromoController::class, 'edit'])->name('kepala-klinik.edit-promo');
+    Route::put('/kepala-klinik/promo/{id}', [PromoController::class, 'update'])->name('kepala-klinik.update-promo');
+    Route::delete('/kepala-klinik/promo/{id}', [PromoController::class, 'destroy'])->name('kepala-klinik.destroy-promo');
+    
 });
 
 // CUSTROMER SERVICE ROLE ROUTE ACCESS :
