@@ -52,6 +52,7 @@ Route::middleware(AdminAccess::class)->group(function () {
     Route::get('/admin/perawatan', [PerawatanController::class, 'index'])->name('admin.index-perawatan');
     Route::get('/admin/perawatan/create', [PerawatanController::class, 'create'])->name('admin.create-perawatan');
     Route::post('/admin/perawatan', [PerawatanController::class, 'store'])->name('admin.store-perawatan');
+    Route::get('/admin/perawatan/{id}/show', [PerawatanController::class, 'show'])->name('admin.show-perawatan');
     Route::get('/admin/perawatan/{id}', [PerawatanController::class, 'edit'])->name('admin.edit-perawatan');
     Route::put('/admin/perawatan/{id}', [PerawatanController::class, 'update'])->name('admin.update-perawatan');
     Route::delete('/admin/perawatan/{id}', [PerawatanController::class, 'destroy'])->name('admin.destroy-perawatan');

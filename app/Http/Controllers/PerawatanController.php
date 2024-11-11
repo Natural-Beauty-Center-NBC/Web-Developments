@@ -14,18 +14,24 @@ class PerawatanController extends Controller
      */
     public function index(Request $request)
     {
-        $query = $request->input('query', ''); // Retrieve the search query
+    $query = $request->input('query', '');
 
-        // Filter employees based on the search query
-        $perawatans = Perawatan::where('nama', 'LIKE', '%' . $query . '%')->get();
-        return view('core.admin.data-perawatan.index', compact('perawatans'))->with([
-            'title' => 'Admin | Perawatan'
+    
+    $perawatans = Perawatan::where('nama', 'LIKE', '%' . $query . '%')->paginate(10); 
+
+    return view('core.admin.data-perawatan.index', compact('perawatans'))->with([
+        'title' => 'Admin | Perawatan'
+    ]);
+    }
+
+    public function show($id)
+    {
+        $perawatan = Perawatan::find($id);
+        return view('core.admin.data-perawatan.show', compact('perawatan'))->with([
+            'title'=>'Admin | Show Perawatan'
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('core.admin.data-perawatan.create')->with([
