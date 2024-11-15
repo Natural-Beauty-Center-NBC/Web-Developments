@@ -1,7 +1,7 @@
 @extends('core.customer-service.layouts.main')
 @section('content')
-<div id="transaksi-type" class="fixed pl-48 inset-0 flex items-center justify-center bg-black bg-opacity-50">
-    <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
+<div id="transaksi-type" class="fixed pl-48 inset-0 flex items-center justify-center">
+    <div class="bg-white border-2 border-[#FF9EAA] rounded-xl shadow-xl p-6 max-w-sm w-full">
         <h3 class="text-lg font-semibold text-gray-900 mb-4">Pilih Jenis Transaksi</h3>
         <div class="flex flex-col gap-4">
             <a href=" " onclick="toggle(event)">

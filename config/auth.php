@@ -44,6 +44,14 @@ return [
             'driver' => 'session',
             'provider' => 'pegawai',
         ],
+        'api-web' => [
+            'driver' => 'passport',
+            'provider' => 'users'
+        ],
+        'api-pegawai' => [
+            'driver' => 'passport',
+            'provider' => 'pegawai'
+        ]
     ],
 
     /*
