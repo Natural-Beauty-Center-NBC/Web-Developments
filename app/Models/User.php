@@ -25,6 +25,7 @@ class User extends Authenticatable
         'jenis_kelamin',
         'email',
         'alamat',
+        'poin',
         'no_telp',
         'alergi',
         'password'

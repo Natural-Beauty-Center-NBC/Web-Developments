@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('tanggal_lahir');
             $table->enum('jenis_kelamin', ['Pria', 'Wanita']);
             $table->string('alamat');
+            $table->integer('poin')->default(0);
             $table->char('no_telp', 20);
             $table->string('alergi');
             $table->timestamp('email_verified_at')->nullable();

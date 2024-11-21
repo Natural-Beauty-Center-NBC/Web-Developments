@@ -19,6 +19,8 @@ class AuthenticationController extends Controller
     public function register(Request $request)
     {
         $registrationData = $request->all();
+
+        // Validation rules
         $validate = Validator::make($registrationData, [
             'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'unique:' . User::class],
@@ -30,34 +32,54 @@ class AuthenticationController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // Return validation errors with status and message
         if ($validate->fails()) {
-            return response(['message' => $validate->errors()], 400);
+            return response([
+                'status' => 'error',
+                'message' => $validate->errors()->first(), // Return the first error message
+            ], 400);
         }
+
+        // Set default value for 'alergi' if null
         if ($request->alergi == null) {
             $registrationData['alergi'] = "Tidak ada";
         }
-        $registrationData['password'] = bcrypt($request->password);
+
+        // Hash the password
+        $registrationData['password'] = Hash::make($request->password);
         $registrationData['id_customer'] = "-";
-        $user = User::create($registrationData);
 
-        // Generate the ID Customer
-        $currentMonth = date('m'); // Two-digit month of registration
-        $currentYear = date('y');  // Two-digit year of registration
+        // Create the user
+        try {
+            $user = User::create($registrationData);
 
-        // Extract date of birth components [ddMMyyyy]
-        $dateOfBirth = date_create($registrationData['tanggal_lahir']);
-        $dayOfBirth = date_format($dateOfBirth, 'd');
-        $monthOfBirth = date_format($dateOfBirth, 'm');
-        $yearOfBirth = date_format($dateOfBirth, 'Y');
+            // Generate the ID Customer
+            $currentMonth = date('m'); // Two-digit month of registration
+            $currentYear = date('y');  // Two-digit year of registration
 
-        $dateSeries = $currentMonth . $currentYear . $dayOfBirth . $monthOfBirth . $yearOfBirth;
-        $user->id_customer = $dateSeries . $user->id;
-        $user->save();
+            // Extract date of birth components [ddMMyyyy]
+            $dateOfBirth = date_create($registrationData['tanggal_lahir']);
+            $dayOfBirth = date_format($dateOfBirth, 'd');
+            $monthOfBirth = date_format($dateOfBirth, 'm');
+            $yearOfBirth = date_format($dateOfBirth, 'Y');
 
-        return response([
-            'message' => 'Registrasi Success',
-            'user' => $user
-        ], 200);
+            $dateSeries = $currentMonth . $currentYear . $dayOfBirth . $monthOfBirth . $yearOfBirth;
+            $user->id_customer = $dateSeries . $user->id;
+            $user->save();
+
+            // Return success response
+            return response([
+                'status' => 'success',
+                'message' => 'Registrasi berhasil.',
+                'user' => $user
+            ], 200);
+        } catch (\Exception $e) {
+            // Return error response for unexpected exceptions
+            return response([
+                'status' => 'error',
+                'message' => 'Terjadi kesalahan saat registrasi.',
+            ], 500);
+        }
     }
 
     /**
@@ -82,6 +104,7 @@ class AuthenticationController extends Controller
                 'message' => 'Logged in as Pegawai',
                 'user_type' => 'pegawai',
                 'pegawai' => $pegawai,
+                'user' => null,
                 'token' => $token,
             ], 200);
         }
@@ -95,15 +118,16 @@ class AuthenticationController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'Logged in as User',
-                'user_type' => 'user',
+                'user_type' => 'customer',
+                'pegawai' => null,
                 'user' => $user,
                 'token' => $token,
             ], 200);
         }
 
-        // If neither found, throw an error
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
+        return response()->json([
+            'status' => 'Error',
+            'message' => 'Invalid Email or Password!',
+        ], 400);
     }
 }

@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'jenis_kelamin' => 'Pria',
             'email' => 'nbc.cus@gmail.com',
             'alamat' => 'Jakarta',
+            'poin' => 200,
             'alergi' => 'Tidak ada',
             'no_telp' => '087712341234',
             'password' => bcrypt('nbccus1234'),
