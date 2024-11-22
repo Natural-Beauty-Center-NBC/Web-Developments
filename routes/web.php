@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminAccess;
 use App\Http\Middleware\CustomerServiceAccess;
 use App\Http\Middleware\DokterAccess;
@@ -90,7 +91,15 @@ Route::middleware(CustomerServiceAccess::class)->group(function () {
     Route::get('/customer-service', [PegawaiController::class, 'home_customer_service'])->name('customer-service.home');
 
     // DATA CUSTOMER :
-    // TODO -> Put your route's code here!!
+    Route::get('/user-service/pendaftaran-user', [UserController::class, 'index'])->name('user-service.index');
+    Route::get('/user-service/pendaftaran-user/create', [UserController::class, 'create'])->name('user-service.create');
+    Route::post('/user-service/pendaftaran-user', [UserController::class, 'store'])->name('user-service.store');
+    Route::get('/user-service/edit-user/{id}', [UserController::class, 'edit'])->name('user-service.edit');
+    Route::put('/user-service/update-user/{id}', [UserController::class, 'update'])->name('user-service.update');
+    Route::get('/user-service/search-user', [UserController::class, 'search'])->name('user-service.search');
+    Route::get('/user-service/cetak-kartu/{id}', [UserController::class, 'showCard'])->name('user-service.showCard'); 
+
+
 
     // TRANSAKSI:
     Route::get('/customer-service/transaksi/create', [TransaksiController::class, 'create'])->name('customer-service.create-transaksi');

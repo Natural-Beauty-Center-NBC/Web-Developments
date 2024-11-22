@@ -11,12 +11,12 @@
                 </a>
             </li>
             <li>
-                <a href=" "
-                    class="{{ $title == 'Customer Service | Customer' || $title == 'Customer Service | Tambah Customer' || $title == 'Customer Service | Update Customer' ? 'bg-[#FF9EAA] to-[#5038ED] text-white font-bold' : '' }} flex items-center text-[16px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold p-2 mb-4 rounded-lg">
+                <a href="{{ route('user-service.index') }}"
+                    class="{{ $title == 'Customer Service | Pendaftaran User' || $title == 'Customer Service | Update Pendaftaran User' ? 'bg-[#FF9EAA] to-[#5038ED] text-white font-bold' : '' }} flex items-center text-[16px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold p-2 mb-4 rounded-lg">
                     <i class="bi bi-person-vcard"></i>
-                    <span class="ms-3">Data Customer</span>
+                    <span class="ms-3">Pendaftaran User</span>
                 </a>
-            </li>
+            </li>            
             <li>
                 <a href="{{ route('customer-service.create-transaksi') }}"
                     class="{{ $title == 'Customer Service | Tambah Transaksi' || $title == 'Customer Service | Transaksi dengan Konsultasi' || $title == 'Customer Service | Transaksi tanpa Konsultasi' ? 'bg-[#FF9EAA] to-[#5038ED] text-white font-bold' : '' }} flex items-center text-[16px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold p-2 mb-4 rounded-lg">
