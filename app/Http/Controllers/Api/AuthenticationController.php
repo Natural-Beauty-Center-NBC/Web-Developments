@@ -96,12 +96,12 @@ class AuthenticationController extends Controller
         // Check if Pegawai exists
         $pegawai = Pegawai::where('email', $request->email)->first();
 
-        if ($pegawai && Hash::check($request->password, $pegawai->password) && $pegawai->role == "Beautician") {
+        if ($pegawai && Hash::check($request->password, $pegawai->password) && ($pegawai->role == "Beautician" || $pegawai->role == "Kepala Klinik")) {
             // If Pegawai found and password matches
             $token = $pegawai->createToken('pegawai-token')->accessToken;
             return response()->json([
                 'status' => 'success',
-                'message' => 'Logged in as Pegawai',
+                'message' => 'Logged in as ' . $pegawai->role,
                 'user_type' => 'pegawai',
                 'pegawai' => $pegawai,
                 'user' => null,
