@@ -16,4 +16,9 @@ class Perawatan extends Model
         'tipe',
         'jumlah_potongan_poin'
     ];
+
+    public function detailPerawatan()
+    {
+        return $this->hasMany(DetailPerawatan::class);
+    }
 }

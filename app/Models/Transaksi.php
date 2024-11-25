@@ -59,4 +59,14 @@ class Transaksi extends Model
     {
         return $this->belongsTo(Promo::class, 'promo_id');
     }
+
+    public function detailPerawatan()
+    {
+        return $this->hasMany(DetailPerawatan::class);
+    }
+
+    public function detailProduk()
+    {
+        return $this->hasMany(DetailProduk::class);
+    }
 }

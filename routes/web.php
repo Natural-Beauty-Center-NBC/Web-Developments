@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PenjadwalanController;
 use App\Http\Controllers\PerawatanController;
@@ -83,6 +84,16 @@ Route::middleware(KepalaKlinikAccess::class)->group(function () {
     Route::get('/kepala-klinik/shift/{id}', [ShiftController::class, 'edit'])->name('kepala-klinik.edit-shift');
     Route::put('/kepala-klinik/shift/{id}', [ShiftController::class, 'update'])->name('kepala-klinik.update-shift');
     Route::delete('/kepala-klinik/shift/{id}', [ShiftController::class, 'destroy'])->name('kepala-klinik.destroy-shift');
+
+    // LAPORAN :
+    Route::get('/kepala-klinik/laporan-customer-baru', [LaporanController::class, 'get_laporan_customer_baru'])->name('kepala-klinik.laporan-customer-baru');
+    Route::get('/kepala-klinik/laporan-pendapatan', [LaporanController::class, 'get_laporan_pendapatan'])->name('kepala-klinik.laporan-pendapatan');
+    Route::get('/kepala-klinik/laporan-jumlah-customer', [LaporanController::class, 'get_laporan_jumlah_customer'])->name('kepala-klinik.laporan-jumlah-customer');
+
+    // PDF :
+    Route::get('/kepala-klinik/download-laporan-customer-baru', [LaporanController::class, 'generate_pdf_laporan_customer_baru'])->name('kepala-klinik.download-laporan-customer-baru');
+    Route::get('/kepala-klinik/download-laporan-pendapatan', [LaporanController::class, 'generate_pdf_laporan_pendapatan'])->name('kepala-klinik.download-laporan-pendapatan');
+    Route::get('/kepala-klinik/download-laporan-jumlah-customer', [LaporanController::class, 'generate_pdf_laporan_jumlah_customer'])->name('kepala-klinik.download-laporan-jumlah-customer');
 });
 
 // CUSTROMER SERVICE ROLE ROUTE ACCESS :

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailPerawatan;
 use App\Models\Pegawai;
 use App\Models\Perawatan;
 use App\Models\Ruangan;
@@ -100,6 +101,8 @@ class TransaksiController extends Controller
             'cs' => 'required'
         ]);
 
+        $perawatan = Perawatan::find($request->perawatan);
+
         // Checking 'is the customer's data exist?' based on id_customer (Unique)
         $customer = User::where('id_customer', $request->id_customer)->first();
         if (!$customer) {
@@ -134,6 +137,15 @@ class TransaksiController extends Controller
             $transaksi->no_transaksi = $dateSeries . '-' . $transaksi->id;
             $transaksi->jenis_transaksi = 'Perawatan tanpa Konsultasi';
             $transaksi->save();
+
+            // Create the DetailPerawatan record
+            DetailPerawatan::create([
+                'jumlah_pembelian' => 1,
+                'jumlah_tukar_point' => 0,
+                'sub_total' => $perawatan->harga,
+                'perawatan_id' => $perawatan->id,
+                'transaksi_id' => $transaksi->id
+            ]);
 
             // Update ruangan's status and assign to
             $ruangan = Ruangan::find($request->ruangan);

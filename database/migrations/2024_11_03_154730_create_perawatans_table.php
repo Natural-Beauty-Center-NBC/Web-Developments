@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('perawatans', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('deskripsi');
+            $table->Text('deskripsi');
             $table->integer('harga');
             $table->enum('tipe', ['Konsultasi', 'Non-Konsultasi']);
             $table->integer('jumlah_potongan_poin');

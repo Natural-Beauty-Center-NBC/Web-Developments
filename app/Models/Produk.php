@@ -16,4 +16,9 @@ class Produk extends Model
         'ukuran',
         'stok'
     ];
+
+    public function detailProduk()
+    {
+        return $this->hasMany(DetailProduk::class);
+    }
 }
