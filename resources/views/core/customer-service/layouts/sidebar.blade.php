@@ -11,7 +11,7 @@
                 </a>
             </li>
             <li>
-                <a href=" "
+                <a href="{{ route('customer-service.index-customer') }}"
                     class="{{ $title == 'Customer Service | Customer' || $title == 'Customer Service | Tambah Customer' || $title == 'Customer Service | Update Customer' ? 'bg-[#FF9EAA] to-[#5038ED] text-white font-bold' : '' }} flex items-center text-[16px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold p-2 mb-4 rounded-lg">
                     <i class="bi bi-person-vcard"></i>
                     <span class="ms-3">Data Customer</span>

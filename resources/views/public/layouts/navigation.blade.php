@@ -44,7 +44,10 @@
 
                         <x-slot name="content">
                             <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('Profile') }}
+                                <i class="bi bi-person-badge"></i> {{ __('Profile') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('profile.card-customer', ['id' => Auth::user()->id])">
+                                <i class="bi bi-file-earmark-pdf"></i> {{ __('Cetak Kartu') }}
                             </x-dropdown-link>
 
                             <!-- Authentication -->
@@ -54,7 +57,7 @@
                                 <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    <i class="bi bi-door-open"></i> {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>

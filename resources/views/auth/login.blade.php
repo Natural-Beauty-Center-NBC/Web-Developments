@@ -1,6 +1,4 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
     <div class="w-full max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-xl dark:bg-gray-800">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
             <img src="{{ asset('assets/nbc-logo.PNG') }}" class="h-10 border border-[#FF9EAA] rounded-xl mb-2" alt="NBC Logo" />
@@ -28,9 +26,9 @@
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
                 <div class="mt-2">
-                <input type="checkbox" id="togglePassword" class="mr-1">
-                <label for="togglePassword" class="text-sm text-gray-900 dark:text-white">Show Password</label>
-            </div>
+                    <input type="checkbox" id="togglePassword" class="mr-1">
+                    <label for="togglePassword" class="text-sm text-gray-900 dark:text-white">Show Password</label>
+                </div>
             </div>
             <div class="flex items-start">
                 <a href="{{ route('password.request') }}" class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Forgot

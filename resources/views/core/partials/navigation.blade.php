@@ -40,7 +40,7 @@
                     <form method="POST" action="{{ route('logout-staff') }}">
                         @csrf
                         <x-dropdown-link :href="route('logout-staff')" onclick="event.preventDefault(); this.closest('form').submit();">
-                            {{ __('Log Out') }}
+                            <i class="bi bi-door-open"></i> {{ __('Log Out') }}
                         </x-dropdown-link>
                     </form>
                 </x-slot>

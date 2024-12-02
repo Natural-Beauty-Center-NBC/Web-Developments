@@ -6,9 +6,11 @@ use App\Http\Controllers\PenjadwalanController;
 use App\Http\Controllers\PerawatanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PromoController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminAccess;
 use App\Http\Middleware\CustomerServiceAccess;
 use App\Http\Middleware\DokterAccess;
@@ -24,8 +26,10 @@ Route::get('/', function () {
 // CUSTOMER ROUTE ACCESS :
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile/delete/{id}', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/customer-card/{id}', [UserController::class, 'generateCustomerCard'])->name('profile.card-customer');
+    Route::put('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password');
 });
 
 // ADMIN ROLE ROUTE ACCESS :
@@ -85,6 +89,14 @@ Route::middleware(KepalaKlinikAccess::class)->group(function () {
     Route::put('/kepala-klinik/shift/{id}', [ShiftController::class, 'update'])->name('kepala-klinik.update-shift');
     Route::delete('/kepala-klinik/shift/{id}', [ShiftController::class, 'destroy'])->name('kepala-klinik.destroy-shift');
 
+    // PROMO :
+    Route::get('/kepala-klinik/promo', [PromoController::class, 'index'])->name('kepala-klinik.index-promo');
+    Route::get('/kepala-klinik/promo/create', [PromoController::class, 'create'])->name('kepala-klinik.create-promo');
+    Route::post('/kepala-klinik/promo', [PromoController::class, 'store'])->name('kepala-klinik.store-promo');
+    Route::get('/kepala-klinik/promo/{id}', [PromoController::class, 'edit'])->name('kepala-klinik.edit-promo');
+    Route::put('/kepala-klinik/promo/{id}', [PromoController::class, 'update'])->name('kepala-klinik.update-promo');
+    Route::delete('/kepala-klinik/promo/{id}', [PromoController::class, 'destroy'])->name('kepala-klinik.destroy-promo');
+
     // LAPORAN :
     Route::get('/kepala-klinik/laporan-customer-baru', [LaporanController::class, 'get_laporan_customer_baru'])->name('kepala-klinik.laporan-customer-baru');
     Route::get('/kepala-klinik/laporan-pendapatan', [LaporanController::class, 'get_laporan_pendapatan'])->name('kepala-klinik.laporan-pendapatan');
@@ -101,7 +113,14 @@ Route::middleware(CustomerServiceAccess::class)->group(function () {
     Route::get('/customer-service', [PegawaiController::class, 'home_customer_service'])->name('customer-service.home');
 
     // DATA CUSTOMER :
-    // TODO -> Put your route's code here!!
+    Route::get('/customer-service/customer', [UserController::class, 'index'])->name('customer-service.index-customer');
+    Route::get('/customer-service/create', [UserController::class, 'create'])->name('customer-service.create-customer');
+    Route::get('/customer-service/detail/{id}', [UserController::class, 'show'])->name('customer-service.detail-customer');
+    Route::post('/customer-service/customer', [UserController::class, 'store'])->name('customer-service.store-customer');
+    Route::get('/customer-service/customer/{id}', [UserController::class, 'edit'])->name('customer-service.edit-customer');
+    Route::put('/customer-service/customer/{id}', [UserController::class, 'update'])->name('customer-service.update-customer');
+    Route::delete('/customer-service/customer/{id}', [UserController::class, 'destroy'])->name('customer-service.destroy-customer');
+    Route::get('/customer-service/customer/card/{id}', [UserController::class, 'generateCustomerCard'])->name('customer-service.card-customer');
 
     // TRANSAKSI:
     Route::get('/customer-service/transaksi/create', [TransaksiController::class, 'create'])->name('customer-service.create-transaksi');
