@@ -21,7 +21,7 @@
                 </form>
             </div>
             <div>
-                <a href="{{ route('kepala-klinik.download-laporan-customer-baru') }}"
+                <a href="{{ route('kepala-klinik.download-laporan-customer-baru', ['year' => request('year', now()->year)]) }}"
                     class="inline-flex gap-2 justify-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
                     <i class="bi bi-file-earmark-pdf"></i>
                     Download PDF

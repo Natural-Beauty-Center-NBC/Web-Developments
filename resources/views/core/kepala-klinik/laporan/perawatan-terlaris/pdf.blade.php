@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Jumlah Customer per Dokter - {{ $monthName }} {{ $year }}</title>
+    <title>Laporan Perawatan Terlaris {{ $year }}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -72,53 +72,35 @@
             Telp. (0274) 487711
         </p>
     </div>
-    <h2 class="title">Laporan Jumlah Customer per Dokter</h2>
+    <h2 class="title">Laporan Perawatan Terlaris</h2>
     <h3><strong>Pada {{ $monthName }} {{ $year }}</strong></h3>
-
     <table>
         <thead>
             <tr>
-                <th class="text-center">No</th>
-                <th class="text-left">Nama Dokter</th>
+                <th>No</th>
                 <th class="text-left">Nama Perawatan</th>
-                <th class="text-center">Jumlah Customer</th>
-                <th class="text-center">Total</th>
+                <th class="text-left">Harga</th>
+                <th>Jumlah Pembelian</th>
             </tr>
         </thead>
         <tbody>
-            <?php $i = 0 ?>
-            @forelse($results as $item)
-                <?php $rowspan = count($item['perawatans']) ?>
-                @foreach($item['perawatans'] as $index => $a)
-                    <tr>
-                        @if($index === 0)
-                            <td class="text-center" rowspan="{{ $rowspan }}">{{ ++$i }}</td>
-                            <td class="text-left" rowspan="{{ $rowspan }}">{{ $item['dokters'] }}</td>
-                        @endif
-                            <td class="text-left">{{ $a->perawatan_name }}</td>
-                            <td class="text-center">{{ $a->jumlah_customer }}</td>
-                        @if($index === 0)
-                            <td class="text-center" rowspan="{{ $rowspan }}">{{ $item['total'] }}</td>
-                        @endif
-                    </tr>
-                @endforeach
-                @empty
-                <tr>
-                    <td colspan="5" class="text-center">Tidak ada data untuk ditampilkan.</td>
-                </tr>
+            @forelse($perawatans as $index => $item)
+            <tr>
+                <td class="text-center">{{ $index + 1 }}</td>
+                <td>{{ $item->nama }}</td>
+                <td>Rp. {{ number_format($item->harga, 0, ',', '.') }}</td>
+                <td class="text-center">{{ $item->jumlah }}</td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="4" class="text-center">Tidak ada data untuk ditampilkan.</td>
+            </tr>
             @endforelse
         </tbody>
-        @if($results->isNotEmpty())
-            <tfoot>
-                <tr class="text-center font-bold text-[18px]">
-                    <td colspan="4" style="text-align: right; padding-right: 80px;">Total</td>
-                    <td class="text-center">{{ $totalJumlahCustomer }}</td>
-                </tr>
-            </tfoot>
-        @endif
     </table>
     <div class="footer">
         Dicetak pada Tanggal {{ $currentDate }}
     </div>
 </body>
+
 </html>

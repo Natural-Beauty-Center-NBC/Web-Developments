@@ -33,7 +33,7 @@
                 </form>
             </div>
             <div>
-                <a href="{{ route('kepala-klinik.download-laporan-jumlah-customer') }}"
+                <a href="{{ route('kepala-klinik.download-laporan-jumlah-customer', ['year' => request('year', now()->year), 'month' => request('month', now()->month)]) }}"
                     class="inline-flex gap-2 justify-center items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300">
                     <i class="bi bi-file-earmark-pdf"></i>
                     Download PDF
@@ -65,9 +65,10 @@
             </thead>
             <tbody>
                 <?php $i = 0 ?>
-                @foreach($results as $item)
-                    <?php $rowspan = count($item['perawatans']) ?>
-                    @foreach($item['perawatans'] as $index => $a)
+                @forelse($results as $item)
+                <?php $rowspan = count($item['perawatans']) ?>
+                    @if($rowspan > 0)
+                        @foreach($item['perawatans'] as $index => $a)
                         <tr class="bg-white border">
                             @if($index === 0)
                             <td class="text-center border" rowspan="{{ $rowspan }}">
@@ -89,9 +90,19 @@
                             </td>
                             @endif
                         </tr>
-                    @endforeach
-                @endforeach
+                        @endforeach
+                    @else
+                    <tr>
+                        <td colspan="5" class="font-semibold text-center p-6">Tidak ada data untuk ditampilkan.</td>
+                    </tr>
+                    @endif
+                    @empty
+                    <tr>
+                        <td colspan="5" class="font-semibold text-center p-6">Tidak ada data untuk ditampilkan.</td>
+                    </tr>
+                @endforelse
             </tbody>
+            @if($results->isNotEmpty())
             <tfoot>
                 <tr class="text-center font-bold text-[18px] border">
                     <td colspan="4" class="px-24 py-4 text-right border">Total</td>
@@ -100,6 +111,7 @@
                     </td>
                 </tr>
             </tfoot>
+            @endif
         </table>
     </div>
 </div>

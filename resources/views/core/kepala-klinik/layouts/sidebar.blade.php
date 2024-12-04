@@ -50,12 +50,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="" class="text-base rounded-lg flex items-center p-2 group !text-[14px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold transition duration-75 pl-8">
+                        <a href="{{ route('kepala-klinik.laporan-produk-terlaris') }}" class="text-base rounded-lg flex items-center p-2 group !text-[14px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold transition duration-75 pl-8">
                             <i class="bi bi-basket"></i> &nbsp; Produk Terlaris
                         </a>
                     </li>
                     <li>
-                        <a href="" class="text-base rounded-lg flex items-center p-2 group !text-[14px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold transition duration-75 pl-8">
+                        <a href="{{ route('kepala-klinik.laporan-perawatan-terlaris') }}" class="text-base rounded-lg flex items-center p-2 group !text-[14px] hover:bg-[#FF9EAA] text-[#171717] hover:text-white hover:font-bold transition duration-75 pl-8">
                             <i class="bi bi-hand-thumbs-up"></i> &nbsp; Perawatan Terlaris
                         </a>
                     </li>

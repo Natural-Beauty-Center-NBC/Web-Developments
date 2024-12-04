@@ -101,11 +101,15 @@ Route::middleware(KepalaKlinikAccess::class)->group(function () {
     Route::get('/kepala-klinik/laporan-customer-baru', [LaporanController::class, 'get_laporan_customer_baru'])->name('kepala-klinik.laporan-customer-baru');
     Route::get('/kepala-klinik/laporan-pendapatan', [LaporanController::class, 'get_laporan_pendapatan'])->name('kepala-klinik.laporan-pendapatan');
     Route::get('/kepala-klinik/laporan-jumlah-customer', [LaporanController::class, 'get_laporan_jumlah_customer'])->name('kepala-klinik.laporan-jumlah-customer');
+    Route::get('/kepala-klinik/laporan-produk-terlaris', [LaporanController::class, 'get_laporan_produk_terlaris'])->name('kepala-klinik.laporan-produk-terlaris');
+    Route::get('/kepala-klinik/laporan-perawatan-terlaris', [LaporanController::class, 'get_laporan_perawatan_terlaris'])->name('kepala-klinik.laporan-perawatan-terlaris');
 
     // PDF :
     Route::get('/kepala-klinik/download-laporan-customer-baru', [LaporanController::class, 'generate_pdf_laporan_customer_baru'])->name('kepala-klinik.download-laporan-customer-baru');
     Route::get('/kepala-klinik/download-laporan-pendapatan', [LaporanController::class, 'generate_pdf_laporan_pendapatan'])->name('kepala-klinik.download-laporan-pendapatan');
     Route::get('/kepala-klinik/download-laporan-jumlah-customer', [LaporanController::class, 'generate_pdf_laporan_jumlah_customer'])->name('kepala-klinik.download-laporan-jumlah-customer');
+    Route::get('/kepala-klinik/download-laporan-produk-terlaris', [LaporanController::class, 'generate_pdf_laporan_produk_terlaris'])->name('kepala-klinik.download-laporan-produk-terlaris');
+    Route::get('/kepala-klinik/download-laporan-perawatan-terlaris', [LaporanController::class, 'generate_pdf_laporan_perawatan_terlaris'])->name('kepala-klinik.download-laporan-perawatan-terlaris');
 });
 
 // CUSTROMER SERVICE ROLE ROUTE ACCESS :

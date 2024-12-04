@@ -60,8 +60,8 @@ class LaporanController extends Controller
 
     public function generate_pdf_laporan_customer_baru(Request $request)
     {
-        // Get the requested year, default to the current year
-        $year = $request->input('year', now()->year);
+        // Get the requested year
+        $year = $request->input('year');
         $currentDate = now()->translatedFormat('d F Y');
 
         // Fetch the data (same as in get_laporan_customer_baru)
@@ -148,8 +148,8 @@ class LaporanController extends Controller
 
     public function generate_pdf_laporan_pendapatan(Request $request)
     {
-        // Get the requested year, default to the current year
-        $year = $request->input('year', now()->year);
+        // Get the requested year
+        $year = $request->input('year');
         $currentDate = now()->translatedFormat('d F Y');
 
         // Query to fetch the data grouped by month
@@ -192,6 +192,126 @@ class LaporanController extends Controller
     }
 
     /**
+     * Handle Laporan Top 10 Produk terlaris
+     */
+    public function get_laporan_produk_terlaris(Request $request)
+    {
+        $year = $request->input('year', now()->year);
+        $month = $request->input('month', now()->month);
+
+        $produks = DB::table('detail_produks')
+            ->select(
+                'produks.nama as nama',
+                'produks.harga as harga',
+                'produks.ukuran as ukuran',
+                DB::raw('SUM(detail_produks.jumlah_pembelian) as jumlah')
+            )
+            ->join('produks', 'detail_produks.produk_id', '=', 'produks.id')
+            ->join('transaksis', 'detail_produks.transaksi_id', '=', 'transaksis.id')
+            ->whereYear('transaksis.tanggal_transaksi', $year)
+            ->whereMonth('transaksis.tanggal_transaksi', $month)
+            ->groupBy('produks.id', 'produks.nama', 'produks.harga', 'produks.ukuran')
+            ->orderByDesc('jumlah')
+            ->limit(10)
+            ->get();
+
+        return view('core.kepala-klinik.laporan.produk-terlaris.index', compact('produks'))->with([
+            'title' => 'Kepala Klinik | Laporan Produk Terlaris'
+        ]);
+    }
+
+    public function generate_pdf_laporan_produk_terlaris(Request $request) 
+    {
+        $year = $request->input('year');
+        $month = $request->input('month');
+        $currentDate = now()->translatedFormat('d F Y');
+
+        $produks = DB::table('detail_produks')
+            ->select(
+                'produks.nama as nama',
+                'produks.harga as harga',
+                'produks.ukuran as ukuran',
+                DB::raw('SUM(detail_produks.jumlah_pembelian) as jumlah')
+            )
+            ->join('produks', 'detail_produks.produk_id', '=', 'produks.id')
+            ->join('transaksis', 'detail_produks.transaksi_id', '=', 'transaksis.id')
+            ->whereYear('transaksis.tanggal_transaksi', $year)
+            ->whereMonth('transaksis.tanggal_transaksi', $month)
+            ->groupBy('produks.id', 'produks.nama', 'produks.harga', 'produks.ukuran')
+            ->orderByDesc('jumlah')
+            ->limit(10)
+            ->get();
+
+            $monthName = Carbon::createFromDate(null, $month, 1)->translatedFormat('F');
+
+            // Load the view into the PDF
+            $pdf = Pdf::loadView('core.kepala-klinik.laporan.produk-terlaris.pdf', compact('produks', 'year', 'monthName', 'currentDate'))
+                ->setPaper('a4', 'portrait');
+    
+            // Return the PDF for download
+            return $pdf->download("Laporan_Produk_Terlaris_" . $monthName . "_" . $year . ".pdf");
+    }
+
+    /**
+     * Handle Laporan Top 10 Perawatan terlaris
+     */
+    public function get_laporan_perawatan_terlaris(Request $request)
+    {
+        $year = $request->input('year', now()->year);
+        $month = $request->input('month', now()->month);
+
+        $perawatans = DB::table('detail_perawatans')
+            ->select(
+                'perawatans.nama as nama',
+                'perawatans.harga as harga',
+                DB::raw('SUM(detail_perawatans.jumlah_pembelian) as jumlah')
+            )
+            ->join('perawatans', 'detail_perawatans.perawatan_id', '=', 'perawatans.id')
+            ->join('transaksis', 'detail_perawatans.transaksi_id', '=', 'transaksis.id')
+            ->whereYear('transaksis.tanggal_transaksi', $year)
+            ->whereMonth('transaksis.tanggal_transaksi', $month)
+            ->groupBy('perawatans.id', 'perawatans.nama', 'perawatans.harga')
+            ->orderByDesc('jumlah')
+            ->limit(10)
+            ->get();
+
+        return view('core.kepala-klinik.laporan.perawatan-terlaris.index', compact('perawatans'))->with([
+            'title' => 'Kepala Klinik | Laporan Perawatan Terlaris'
+        ]);
+    }
+
+    public function generate_pdf_laporan_perawatan_terlaris(Request $request)
+    {
+        $year = $request->input('year');
+        $month = $request->input('month');
+        $currentDate = now()->translatedFormat('d F Y');
+
+        $perawatans = DB::table('detail_perawatans')
+            ->select(
+                'perawatans.nama as nama',
+                'perawatans.harga as harga',
+                DB::raw('SUM(detail_perawatans.jumlah_pembelian) as jumlah')
+            )
+            ->join('perawatans', 'detail_perawatans.perawatan_id', '=', 'perawatans.id')
+            ->join('transaksis', 'detail_perawatans.transaksi_id', '=', 'transaksis.id')
+            ->whereYear('transaksis.tanggal_transaksi', $year)
+            ->whereMonth('transaksis.tanggal_transaksi', $month)
+            ->groupBy('perawatans.id', 'perawatans.nama', 'perawatans.harga')
+            ->orderByDesc('jumlah')
+            ->limit(10)
+            ->get();
+
+        $monthName = Carbon::createFromDate(null, $month, 1)->translatedFormat('F');
+
+        // Load the view into the PDF
+        $pdf = Pdf::loadView('core.kepala-klinik.laporan.perawatan-terlaris.pdf', compact('perawatans', 'year', 'monthName', 'currentDate'))
+            ->setPaper('a4', 'portrait');
+
+        // Return the PDF for download
+        return $pdf->download("Laporan_Perawatan_Terlaris_" . $monthName . "_" . $year . ".pdf");
+    }
+
+    /**
      * Handle Laporan Jumlah Customer
      */
     public function get_laporan_jumlah_customer(Request $request)
@@ -231,8 +351,8 @@ class LaporanController extends Controller
 
     public function generate_pdf_laporan_jumlah_customer(Request $request)
     {
-        $year = $request->input('year', now()->year);
-        $month = $request->input('month', now()->month);
+        $year = $request->input('year');
+        $month = $request->input('month');
         $currentDate = now()->translatedFormat('d F Y');
 
         // Query to fetch the report
