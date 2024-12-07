@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('diskon')->default(0);
             $table->integer('poin_earned')->default(0);
             $table->dateTime('tanggal_transaksi');
+            $table->enum('status_pemeriksaan', ['Checked', 'Pending'])->default('Pending');
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->unsignedBigInteger('dokter_id')->nullable();
             $table->unsignedBigInteger('customer_service_id')->nullable();

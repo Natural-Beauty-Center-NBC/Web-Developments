@@ -48,16 +48,22 @@ class AuthenticatedSessionController extends Controller
             if ($role === 'Admin') {
                 Alert::success('Success', 'Anda berhasil Login sebagai Admin');
                 return redirect()->route('admin.home');
+
             } elseif ($role === 'Kepala Klinik') {
                 Alert::success('Success', 'Anda berhasil Login sebagai Kepala Klinik');
                 return redirect()->route('kepala-klinik.home');
+
             } elseif ($role === 'Customer Service') {
                 Alert::success('Success', 'Anda berhasil Login sebagai Customer Service');
                 return redirect()->route('customer-service.home');
+
             } elseif ($role === 'Dokter') {
+                Alert::success('Success', 'Anda berhasil Login sebagai Dokter');
+                return redirect()->route('dokter.queue');
 
             } else if ($role === 'Kasir') {
-                
+                Alert::success('Success', 'Anda berhasil Login sebagai Kasir');
+                return redirect()->route('kasir.daftar-pending');
             }
 
             // Default redirect

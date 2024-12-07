@@ -175,15 +175,6 @@ class PegawaiController extends Controller
         ]);
     }
 
-    // DOKTER ROLE :
-    public function home_dokter()
-    {
-        $dokter = Auth::guard('pegawai')->user();
-        return view('core.dokter.home', compact('dokter'))->with([
-            'title' => 'Dokter | Home'
-        ]);
-    }
-
     // KASIR ROLE :
     public function home_kasir()
     {

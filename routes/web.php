@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PemeriksaanController;
 use App\Http\Controllers\PenjadwalanController;
 use App\Http\Controllers\PerawatanController;
 use App\Http\Controllers\ProdukController;
@@ -136,16 +138,36 @@ Route::middleware(CustomerServiceAccess::class)->group(function () {
 
 // DOKTER ROLE ROUTE ACCESS :
 Route::middleware(DokterAccess::class)->group(function () {
-    Route::get('/dokter', [PegawaiController::class, 'home_dokter'])->name('dokter.home');
 
-    // TODO -> Put your route's code here!!
+    // PEMERIKSAAN :
+    Route::get('/dokter/get-queue', [PemeriksaanController::class, 'index'])->name('dokter.queue');
+    Route::get('/dokter/riwayat-pemeriksaan/{id}', [PemeriksaanController::class, 'getRiwayatPemeriksaan'])->name('dokter.riwayat-pemeriksaan');
+    Route::get('/dokter/input-pemeriksaan/create-perawatan/{id}', [PemeriksaanController::class, 'create_input_perawatan'])->name('dokter.create-input-perawatan');
+    Route::get('/dokter/input-pemeriksaan/create-produk/{id}', [PemeriksaanController::class, 'create_input_produk'])->name('dokter.create-input-produk');
+    Route::post('/dokter/input-pemeriksaan-perawatan', [PemeriksaanController::class, 'store_input_perawatan'])->name('dokter.input-perawatan');
+    Route::post('/dokter/input-pemeriksaan-produk', [PemeriksaanController::class, 'store_input_produk'])->name('dokter.input-produk');
+
+    Route::get('/dokter/edit-pemeriksaan-perawatan/{id}', [PemeriksaanController::class, 'edit_pemeriksaan_perawatan'])->name('dokter.edit-perawatan');
+    Route::get('/dokter/edit-pemeriksaan-produk/{id}', [PemeriksaanController::class, 'edit_pemeriksaan_produk'])->name('dokter.edit-produk');
+    Route::put('/dokter/update-pemeriksaan-produk/{id}', [PemeriksaanController::class, 'update_jumlah_produk'])->name('dokter.update-produk');
+    Route::delete('/dokter/delete-produk/{id}', [PemeriksaanController::class, 'delete_produk'])->name('dokter.delete-produk');
+
+    Route::put('/dokter/update-pemeriksaan-perawatan/{id}', [PemeriksaanController::class, 'update_pemeriksaan_perawatan'])->name('dokter.update-perawatan');
+    Route::get('/dokter/mark-as-done/{id}', [PemeriksaanController::class, 'markAsDone'])->name('dokter.mark-as-done');
 });
 
 // KASIR ROLE ROUTE ACCESS :
 Route::middleware(KasirAccess::class)->group(function () {
-    Route::get('/kasir', [PegawaiController::class, 'home_kasir'])->name('kasir.home');
 
-    // TODO -> Put your route's code here!!
+    // PEMBAYARAN
+    Route::get('/kasir/get-transaksi-pending', [PembayaranController::class, 'index'])->name('kasir.daftar-pending');
+    Route::get('/kasir/detail-pembayaran/{id}', [PembayaranController::class, 'create'])->name('kasir.detail-pembayaran');
+    Route::post('/kasir/pembayaran/{id}', [PembayaranController::class, 'payment'])->name('kasir.pembayaran');
+    Route::get('/kasir/get-transaksi-paid', [PembayaranController::class, 'index_paid'])->name('kasir.daftar-paid');
+    Route::post('/kasir/redeem/{id}', [PembayaranController::class, 'redeemPoints'])->name('kasir.redeem-point');
+    
+    // GENERATE INVOICE
+    Route::get('/kasir/get-invoice/{id}', [PembayaranController::class, 'generateInvoice'])->name('kasir.generate-invoice');
 });
 
 require __DIR__ . '/auth.php';
