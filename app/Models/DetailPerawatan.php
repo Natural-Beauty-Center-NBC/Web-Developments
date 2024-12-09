@@ -9,6 +9,8 @@ class DetailPerawatan extends Model
 {
     use HasFactory;
 
+    protected $table = 'detail_perawatans';
+
     protected $fillable = [
         'jumlah_pembelian',
         'jumlah_tukar_point',

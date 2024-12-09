@@ -10,6 +10,8 @@ use Laravel\Passport\HasApiTokens;
 class Pegawai extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = 'pegawais';
     
     protected $fillable = [
         'nama',

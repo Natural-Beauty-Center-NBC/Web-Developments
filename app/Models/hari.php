@@ -9,6 +9,8 @@ class hari extends Model
 {
     use HasFactory;
 
+    protected $table = 'haris';
+    
     protected $fillable = [
         'nama'
     ];

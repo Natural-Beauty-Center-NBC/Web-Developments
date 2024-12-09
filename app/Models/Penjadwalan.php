@@ -9,6 +9,8 @@ class Penjadwalan extends Model
 {
     use HasFactory;
 
+    protected $table = 'penjadwalans';
+
     protected $fillable = [
         'pegawai_id',
         'shift_id',

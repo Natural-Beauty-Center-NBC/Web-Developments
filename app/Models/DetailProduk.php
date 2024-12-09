@@ -9,6 +9,8 @@ class DetailProduk extends Model
 {
     use HasFactory;
 
+    protected $table = 'detail_produks';
+    
     protected $fillable = [
         'jumlah_pembelian',
         'sub_total',
