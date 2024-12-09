@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\hari;
+use App\Models\Hari;
 use App\Models\Pegawai;
 use App\Models\Penjadwalan;
 use App\Models\Shift;

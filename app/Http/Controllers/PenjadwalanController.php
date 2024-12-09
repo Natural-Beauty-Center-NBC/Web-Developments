@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\hari;
+use App\Models\Hari;
 use App\Models\Pegawai;
 use App\Models\Penjadwalan;
 use App\Models\Shift;
@@ -30,7 +30,7 @@ class PenjadwalanController extends Controller
     {
         $dokters = Pegawai::where('role', 'Dokter')->get();
         $beauticians = Pegawai::where('role', 'Beautician')->get();
-        $haris = hari::all();
+        $haris = Hari::all();
         $shifts = Shift::all();
 
         return view('core.kepala-klinik.data-penjadwalan.create', compact('dokters', 'beauticians', 'haris', 'shifts'))->with([
@@ -91,7 +91,7 @@ class PenjadwalanController extends Controller
         $penjadwalan = Penjadwalan::find($id);
         $dokters = Pegawai::where('role', 'Dokter')->get();
         $beauticians = Pegawai::where('role', 'Beautician')->get();
-        $haris = hari::all();
+        $haris = Hari::all();
         $shifts = Shift::all();
 
         return view('core.kepala-klinik.data-penjadwalan.edit', compact('penjadwalan', 'dokters', 'beauticians', 'haris', 'shifts'))->with([
