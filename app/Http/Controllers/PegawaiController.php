@@ -144,7 +144,7 @@ class PegawaiController extends Controller
     // KEPALA KLINIK ROLE :
     public function home_kepala_klinik()
     {
-        $haris = hari::all();
+        $haris = Hari::all();
         $shifts = Shift::all();
         $dokters = Penjadwalan::whereHas('pegawai', function ($query) {
             $query->where('role', 'Dokter');
