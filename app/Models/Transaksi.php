@@ -4,6 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Pegawai;
+use App\Models\Ruangan;
+use App\Models\Promo;
+use App\Models\DetailPerawatan;
+use App\Models\DetailProduk;
 
 class Transaksi extends Model
 {

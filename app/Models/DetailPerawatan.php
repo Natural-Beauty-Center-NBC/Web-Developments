@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Perawatan;
+use App\Models\Transaksi;
 
 class DetailPerawatan extends Model
 {
