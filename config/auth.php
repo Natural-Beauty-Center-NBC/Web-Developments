@@ -46,11 +46,13 @@ return [
         ],
         'api-web' => [
             'driver' => 'passport',
-            'provider' => 'users'
+            'provider' => 'users',
+            'hash' => false,
         ],
         'api-pegawai' => [
             'driver' => 'passport',
-            'provider' => 'pegawai'
+            'provider' => 'pegawai',
+            'hash' => false,
         ]
     ],
 
